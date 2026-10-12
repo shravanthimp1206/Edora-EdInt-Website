@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Edora | Teacher Survey</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#0F172A;--indigo:#4F46E5;--indigo-d:#4338CA;--tint:#EEF0FF;--mute:#5B6478;--line:#E6E8F0;--bg:#fff;--soft:#F7F8FC;
+--violet:#7C3AED;--card:#fff;--nav-bg:rgba(255,255,255,.9);--glass:rgba(255,255,255,.65);--glass-brd:rgba(15,23,42,.10);
+color-scheme:light}
+[data-theme="dark"]{--ink:#E7EAF3;--indigo:#818CF8;--indigo-d:#A5B4FC;--tint:rgba(129,140,248,.15);--mute:#98A1B8;--line:#242C3F;--bg:#0B0F19;--soft:#111827;
+--violet:#A78BFA;--card:#151C2C;--nav-bg:rgba(11,15,25,.82);--glass:rgba(255,255,255,.05);--glass-brd:rgba(255,255,255,.13);color-scheme:dark}
+html{scroll-behavior:smooth}
+*,*:before,*:after{box-sizing:border-box}
+body{margin:0;min-height:100vh;background:var(--bg);color:var(--ink);font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.6;letter-spacing:-.01em;-webkit-font-smoothing:antialiased;transition:background-color .3s ease,color .3s ease}
+body:before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
+background:radial-gradient(520px 420px at 88% -6%,rgba(79,70,229,.16),transparent 70%),radial-gradient(480px 420px at 0% 60%,rgba(124,58,237,.12),transparent 72%)}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:820px;margin:0 auto;padding:0 22px;position:relative;z-index:1}
+nav{position:sticky;top:0;z-index:5;background:var(--nav-bg);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+nav .wrap{display:flex;justify-content:space-between;align-items:center;height:66px;max-width:1080px}
+.logo{display:flex;align-items:center;gap:10px;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:24px;letter-spacing:-.03em}
+.logo i{font-style:normal;display:grid;place-items:center;width:34px;height:34px;border-radius:10px;background:linear-gradient(135deg,var(--indigo),var(--violet));color:#fff;font-size:20px;box-shadow:0 6px 16px -8px rgba(79,70,229,.8)}
+.logo b{font-weight:700}.logo b span{color:var(--indigo)}
+.nav-right{display:flex;align-items:center;gap:14px}
+.back-link{font-size:14.5px;font-weight:600;color:var(--mute);display:inline-flex;align-items:center;gap:6px;transition:color .2s ease}
+.back-link:hover{color:var(--ink)}
+.back-link svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.theme-toggle{width:40px;height:40px;flex:0 0 auto;display:grid;place-items:center;border-radius:12px;border:1px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer;font-size:17px;line-height:1;font-family:inherit;transition:background-color .3s ease,color .3s ease,border-color .3s ease,transform .15s ease}
+.theme-toggle:hover{transform:translateY(-1px);border-color:var(--indigo)}
+.theme-toggle .tt-ico{pointer-events:none}
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid var(--indigo);outline-offset:2px}
+header.page-head{padding:58px 0 26px;text-align:center}
+.eyebrow{display:inline-block;font-size:13px;font-weight:600;letter-spacing:.02em;text-transform:uppercase;padding:6px 14px;border-radius:99px;background:linear-gradient(135deg,var(--indigo),var(--violet));color:#fff}
+header.page-head h1{font-family:'Space Grotesk',sans-serif;font-size:clamp(28px,4.4vw,42px);font-weight:700;letter-spacing:-.03em;margin:18px 0 12px;line-height:1.12}
+header.page-head p{color:var(--mute);font-size:17px;max-width:560px;margin:0 auto}
+.survey-shell{margin:18px 0 70px;background:var(--glass);border:1px solid var(--glass-brd);border-radius:24px;padding:26px 30px 30px;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:0 30px 70px -34px rgba(79,70,229,.4)}
+.progress-wrap{margin-bottom:8px}
+.progress-meta{display:flex;justify-content:space-between;align-items:baseline;font-size:14px;font-weight:600;color:var(--mute);margin-bottom:10px}
+.progress-meta .step-name{color:var(--indigo-d)}
+[data-theme="dark"] .progress-meta .step-name{color:var(--indigo)}
+.progress{height:8px;border-radius:99px;background:var(--tint);overflow:hidden}
+.progress-bar{height:100%;width:25%;border-radius:99px;background:linear-gradient(90deg,var(--indigo),var(--violet));transition:width .4s cubic-bezier(.22,.68,0,1)}
+.step{display:none;border:0;padding:24px 0 2px;margin:0;animation:fadeStep .35s ease}
+.step.is-active{display:block}
+@keyframes fadeStep{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.step legend,.step .step-title{padding:0;font-family:'Space Grotesk',sans-serif;font-size:20px;font-weight:700;letter-spacing:-.03em;color:var(--ink)}
+.step-note{margin:6px 0 0;font-size:14px;color:var(--mute);line-height:1.6}
+.q{margin-top:22px}
+.qlabel{display:block;font-weight:600;font-size:15px;letter-spacing:-.01em;color:var(--ink);margin-bottom:10px}
+.opt{color:var(--mute);font-weight:500}
+.q-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:22px}
+.q-grid .q{margin-top:0}
+input[type=text],input[type=email],select,textarea{width:100%;font-family:'Inter',sans-serif;font-size:15px;letter-spacing:-.01em;line-height:1.6;color:var(--ink);padding:13px 14px;border-radius:12px;border:1px solid var(--glass-brd);background:var(--glass);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);transition:border-color .2s ease,box-shadow .2s ease,background-color .2s ease}
+input::placeholder,textarea::placeholder{color:var(--mute)}
+input:hover,select:hover,textarea:hover{border-color:var(--indigo)}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--indigo);box-shadow:0 0 0 3px rgba(79,70,229,.22)}
+textarea{min-height:104px;resize:vertical}
+.pills{display:flex;flex-wrap:wrap;gap:10px}
+.pill{position:relative;display:inline-flex;cursor:pointer}
+.pill input{position:absolute;width:1px;height:1px;opacity:0;margin:0}
+.pill span{display:inline-block;font-family:'Inter',sans-serif;font-size:14px;font-weight:500;letter-spacing:-.01em;color:var(--mute);padding:9px 16px;border-radius:99px;border:1px solid var(--glass-brd);background:var(--glass);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);transition:color .2s ease,border-color .2s ease,background-color .2s ease,transform .15s ease,box-shadow .2s ease}
+.pill:hover span{border-color:var(--indigo);color:var(--ink);transform:translateY(-1px)}
+.pill input:checked + span{background:linear-gradient(135deg,var(--indigo),var(--violet));color:#fff;border-color:transparent;box-shadow:0 10px 22px -12px rgba(79,70,229,.85)}
+.pill input:focus-visible + span{outline:3px solid var(--indigo);outline-offset:2px}
+.pills.invalid span{border-color:#EF4444}
+.pills.invalid{animation:shake .3s}
+@keyframes shake{25%{transform:translateX(-4px)}75%{transform:translateX(4px)}}
+.survey-actions{display:flex;align-items:center;gap:14px;flex-wrap:wrap;border-top:1px dashed var(--line);padding-top:24px;margin-top:28px}
+.spacer{flex:1}
+.btn{display:inline-block;background:linear-gradient(135deg,var(--indigo),var(--violet));color:#fff;font-weight:600;font-size:15px;padding:13px 28px;border-radius:12px;border:0;cursor:pointer;font-family:inherit;transition:filter .2s ease,box-shadow .2s ease,transform .15s ease}
+.btn:hover{filter:brightness(1.08);box-shadow:0 12px 26px -14px rgba(79,70,229,.9)}
+.btn.ghost{background:var(--card);color:var(--ink);border:1px solid var(--line)}
+.btn.ghost:hover{background:var(--soft)}
+.btn:disabled{opacity:.6;cursor:not-allowed;filter:none}
+[data-theme="dark"] .btn:not(.ghost){color:#0B0F19}
+.survey-status{font-family:'Inter',sans-serif;font-size:14px;margin:14px 0 0;width:100%;color:var(--mute);letter-spacing:-.01em}
+.survey-status.ok{color:#16A34A;font-weight:600}
+.survey-status.err{color:#DC2626;font-weight:600}
+[data-theme="dark"] .survey-status.ok{color:#86EFAC}
+[data-theme="dark"] .survey-status.err{color:#FCA5A5}
+.survey-success{text-align:center;padding:30px 18px 14px}
+.survey-success .tick{width:64px;height:64px;margin:0 auto 18px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,var(--indigo),var(--violet));box-shadow:0 18px 40px -18px rgba(79,70,229,.9)}
+.survey-success .tick svg{width:30px;height:30px;stroke:#fff;fill:none;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}
+.survey-success h2{font-family:'Space Grotesk',sans-serif;font-size:26px;letter-spacing:-.03em;margin:0 0 10px}
+.survey-success p{color:var(--mute);margin:0 auto;max-width:440px}
+.survey-success a.mail{color:var(--indigo-d);font-weight:600;border-bottom:1px solid currentColor}
+footer{padding:26px 0 44px;color:var(--mute);font-size:14px;text-align:center}
+@media(max-width:640px){.q-grid{grid-template-columns:1fr}.survey-shell{padding:22px 18px 24px}header.page-head{padding:42px 0 20px}.back-link span{display:none}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+
+<nav><div class="wrap">
+<a class="logo" href="edora-landing.html" aria-label="Edora home"><i>E</i><b>Ed<span>ora</span></b></a>
+<div class="nav-right">
+<a class="back-link" href="edora-landing.html"><svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg><span>Back to site</span></a>
+<button id="theme-toggle" class="theme-toggle" type="button" aria-label="Switch to dark mode" title="Toggle theme"><span class="tt-ico">🌙</span></button>
+</div>
+</div></nav>
+
+<header class="page-head"><div class="wrap">
+<span class="eyebrow">Teacher Survey</span>
+<h1>Help us build Edora for real classrooms.</h1>
+<p>Four short steps, about five minutes. Your answers go straight to the Edora team and shape what we build first.</p>
+</div></header>
+
+<main class="wrap">
+<div class="survey-shell">
+
+<div class="progress-wrap">
+<div class="progress-meta"><span id="stepLabel">Step 1 of 4</span><span id="stepName" class="step-name">Screener</span></div>
+<div class="progress" role="progressbar" aria-label="Survey progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="25"><div class="progress-bar" id="progressBar"></div></div>
+</div>
+
+<form id="surveyForm" action="https://api.web3forms.com/submit" method="POST" novalidate>
+<input type="hidden" name="access_key" value="5d3484b4-c2ab-453f-a162-6b880571e767">
+<input type="hidden" name="subject" value="New Edora Teacher Survey Response!">
+<input type="hidden" name="survey_type" value="Teacher Survey (multi-step)">
+<input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
+
+<section class="step is-active" data-step="1" aria-label="Step 1: Screener">
+<fieldset style="border:0;padding:0;margin:0">
+<legend class="step-title">Screener</legend>
+<p class="step-note">A little context so we can understand your answers.</p>
+<div class="q-grid">
+<div class="q">
+<label class="qlabel" for="school">School name</label>
+<input id="school" name="school_name" type="text" required placeholder="e.g. Green Valley Public School" autocomplete="organization">
+</div>
+<div class="q">
+<label class="qlabel" for="subject">Primary subject</label>
+<input id="subject" name="primary_subject" type="text" required placeholder="e.g. Physics, Mathematics" autocomplete="off">
+</div>
+</div>
+<div class="q">
+<span class="qlabel">Grade levels you teach <span class="opt">(select all that apply)</span></span>
+<div class="pills" data-group="grades_taught" data-required="true">
+<label class="pill"><input type="checkbox" value="Class 9"><span>Class 9</span></label>
+<label class="pill"><input type="checkbox" value="Class 10"><span>Class 10</span></label>
+<label class="pill"><input type="checkbox" value="Class 11"><span>Class 11</span></label>
+<label class="pill"><input type="checkbox" value="Class 12"><span>Class 12</span></label>
+</div>
+</div>
+</fieldset>
+</section>
+
+<section class="step" data-step="2" aria-label="Step 2: Paper Setting and Workload">
+<fieldset style="border:0;padding:0;margin:0">
+<legend class="step-title">Paper setting &amp; workload</legend>
+<p class="step-note">How you currently create and balance exam papers.</p>
+<div class="q">
+<span class="qlabel">How long does it take you to create one exam paper?</span>
+<div class="pills">
+<label class="pill"><input type="radio" name="time_per_exam" value="Under 1 hour" required><span>Under 1 hour</span></label>
+<label class="pill"><input type="radio" name="time_per_exam" value="1-3 hours"><span>1-3 hours</span></label>
+<label class="pill"><input type="radio" name="time_per_exam" value="3-6 hours"><span>3-6 hours</span></label>
+<label class="pill"><input type="radio" name="time_per_exam" value="6+ hours"><span>6+ hours</span></label>
+</div>
+</div>
+<div class="q">
+<span class="qlabel">Where do your questions come from? <span class="opt">(select all that apply)</span></span>
+<div class="pills" data-group="question_bank_sources" data-required="true">
+<label class="pill"><input type="checkbox" value="Textbook question bank"><span>Textbook question bank</span></label>
+<label class="pill"><input type="checkbox" value="Previous year papers"><span>Previous year papers</span></label>
+<label class="pill"><input type="checkbox" value="Online resources"><span>Online resources</span></label>
+<label class="pill"><input type="checkbox" value="Own notes / handwritten"><span>Own notes / handwritten</span></label>
+<label class="pill"><input type="checkbox" value="School software"><span>School software</span></label>
+<label class="pill"><input type="checkbox" value="Other"><span>Other</span></label>
+</div>
+</div>
+<div class="q">
+<span class="qlabel">What slows paper setting down the most? <span class="opt">(select all that apply)</span></span>
+<div class="pills" data-group="pain_points" data-required="true">
+<label class="pill"><input type="checkbox" value="Balancing difficulty"><span>Balancing difficulty</span></label>
+<label class="pill"><input type="checkbox" value="Making multiple versions"><span>Making multiple versions</span></label>
+<label class="pill"><input type="checkbox" value="Formatting and typing"><span>Formatting &amp; typing</span></label>
+<label class="pill"><input type="checkbox" value="Choosing relevant questions"><span>Choosing relevant questions</span></label>
+<label class="pill"><input type="checkbox" value="Preparing answer keys"><span>Preparing answer keys</span></label>
+<label class="pill"><input type="checkbox" value="Meeting deadlines"><span>Meeting deadlines</span></label>
+</div>
+</div>
+</fieldset>
+</section>
+
+<section class="step" data-step="3" aria-label="Step 3: Evaluation and Diagnostics">
+<fieldset style="border:0;padding:0;margin:0">
+<legend class="step-title">Evaluation &amp; diagnostics</legend>
+<p class="step-note">How you grade and understand how students are doing.</p>
+<div class="q">
+<span class="qlabel">How long does grading one exam take?</span>
+<div class="pills">
+<label class="pill"><input type="radio" name="grading_time" value="Under 1 hour" required><span>Under 1 hour</span></label>
+<label class="pill"><input type="radio" name="grading_time" value="1-3 hours"><span>1-3 hours</span></label>
+<label class="pill"><input type="radio" name="grading_time" value="3-6 hours"><span>3-6 hours</span></label>
+<label class="pill"><input type="radio" name="grading_time" value="6+ hours"><span>6+ hours</span></label>
+</div>
+</div>
+<div class="q">
+<span class="qlabel">Do you track student learning gaps?</span>
+<div class="pills">
+<label class="pill"><input type="radio" name="track_gaps" value="Yes, regularly" required><span>Yes, regularly</span></label>
+<label class="pill"><input type="radio" name="track_gaps" value="Sometimes"><span>Sometimes</span></label>
+<label class="pill"><input type="radio" name="track_gaps" value="Rarely"><span>Rarely</span></label>
+<label class="pill"><input type="radio" name="track_gaps" value="Not yet"><span>Not yet</span></label>
+</div>
+</div>
+<div class="q">
+<label class="qlabel" for="diagnostics">How do you spot and record a student's weak topics? <span class="opt">(optional)</span></label>
+<textarea id="diagnostics" name="diagnostics_note" placeholder="e.g. I compare marks topic by topic in a notebook..."></textarea>
+</div>
+</fieldset>
+</section>
+
+<section class="step" data-step="4" aria-label="Step 4: Feature Wishlist and Feedback">
+<fieldset style="border:0;padding:0;margin:0">
+<legend class="step-title">Feature wishlist &amp; feedback</legend>
+<p class="step-note">What should EdInt do for you first?</p>
+<div class="q">
+<span class="qlabel">Which features matter most to you? <span class="opt">(select all that apply)</span></span>
+<div class="pills" data-group="priority_features" data-required="true">
+<label class="pill"><input type="checkbox" value="Auto question paper generation"><span>Auto question paper generation</span></label>
+<label class="pill"><input type="checkbox" value="Answer key and marking scheme"><span>Answer key &amp; marking scheme</span></label>
+<label class="pill"><input type="checkbox" value="Difficulty balancing"><span>Difficulty balancing</span></label>
+<label class="pill"><input type="checkbox" value="Student performance analytics"><span>Student performance analytics</span></label>
+<label class="pill"><input type="checkbox" value="Learning-gap reports"><span>Learning-gap reports</span></label>
+<label class="pill"><input type="checkbox" value="Multiple paper versions"><span>Multiple paper versions</span></label>
+</div>
+</div>
+<div class="q">
+<label class="qlabel" for="wishlist">Anything else we should build or improve? <span class="opt">(optional)</span></label>
+<textarea id="wishlist" name="suggestions" placeholder="Share your ideas..."></textarea>
+</div>
+<div class="q">
+<label class="qlabel" for="email">Email <span class="opt">(optional, if you'd like a follow-up)</span></label>
+<input id="email" name="email" type="email" placeholder="you@school.edu" autocomplete="email">
+</div>
+</fieldset>
+</section>
+
+<div class="survey-actions">
+<button type="button" class="btn ghost" id="backBtn" hidden>Back</button>
+<span class="spacer"></span>
+<button type="button" class="btn" id="nextBtn">Next</button>
+<button type="submit" class="btn" id="submitBtn" hidden>Submit survey</button>
+</div>
+<p class="survey-status" id="surveyStatus" role="status" aria-live="polite">Your responses go straight to the Edora team.</p>
+</form>
+
+<div class="survey-success" id="surveySuccess" hidden>
+<div class="tick"><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg></div>
+<h2>Thank you for sharing!</h2>
+<p>Your feedback is shaping Edora. If you added an email, we'll be in touch. Questions? Write to <a class="mail" href="mailto:admin.edora@gmail.com">admin.edora@gmail.com</a>.</p>
+</div>
+
+</div>
+</main>
+
+<footer>© 2026 Edora · admin.edora@gmail.com</footer>
+
+<script>
+(function(){
+  var root=document.documentElement;
+  var toggle=document.getElementById('theme-toggle');
+  var ico=toggle.querySelector('.tt-ico');
+  function apply(mode){
+    root.setAttribute('data-theme',mode);
+    ico.textContent=mode==='dark'?'☀️':'🌙';
+    toggle.setAttribute('aria-label',mode==='dark'?'Switch to light mode':'Switch to dark mode');
+  }
+  var saved=null;
+  try{saved=localStorage.getItem('edora-theme');}catch(e){}
+  var prefersDark=window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches;
+  apply(saved||(prefersDark?'dark':'light'));
+  toggle.addEventListener('click',function(){
+    var next=root.getAttribute('data-theme')==='dark'?'light':'dark';
+    apply(next);
+    try{localStorage.setItem('edora-theme',next);}catch(e){}
+  });
+})();
+
+(function(){
+  var form=document.getElementById('surveyForm');
+  if(!form) return;
+  var steps=Array.prototype.slice.call(form.querySelectorAll('.step'));
+  var total=steps.length;
+  var names=['Screener','Paper setting & workload','Evaluation & diagnostics','Feature wishlist & feedback'];
+  var current=0;
+
+  var backBtn=document.getElementById('backBtn');
+  var nextBtn=document.getElementById('nextBtn');
+  var submitBtn=document.getElementById('submitBtn');
+  var status=document.getElementById('surveyStatus');
+  var progressBar=document.getElementById('progressBar');
+  var stepLabel=document.getElementById('stepLabel');
+  var stepName=document.getElementById('stepName');
+  var progressWrap=document.querySelector('.progress');
+
+  function syncGroups(){
+    form.querySelectorAll('.pills[data-group]').forEach(function(g){
+      var sink=g.querySelector('input[type="hidden"][data-sink]');
+      if(!sink){
+        sink=document.createElement('input');
+        sink.type='hidden';
+        sink.name=g.getAttribute('data-group');
+        sink.setAttribute('data-sink','');
+        g.appendChild(sink);
+      }
+      var vals=[];
+      g.querySelectorAll('input[type="checkbox"]:checked').forEach(function(c){vals.push(c.value);});
+      sink.value=vals.join(', ');
+    });
+  }
+  syncGroups();
+  form.querySelectorAll('.pills[data-group]').forEach(function(g){
+    g.addEventListener('change',syncGroups);
+  });
+
+  function render(){
+    steps.forEach(function(s,i){s.classList.toggle('is-active',i===current);});
+    var pct=Math.round(((current+1)/total)*100);
+    progressBar.style.width=pct+'%';
+    progressWrap.setAttribute('aria-valuenow',pct);
+    stepLabel.textContent='Step '+(current+1)+' of '+total;
+    stepName.textContent=names[current]||'';
+    backBtn.hidden=current===0;
+    nextBtn.hidden=current===total-1;
+    submitBtn.hidden=current!==total-1;
+    status.textContent='Your responses go straight to the Edora team.';
+    status.className='survey-status';
+  }
+
+  function validateStep(step){
+    var firstBad=null;
+    step.querySelectorAll('.pills[data-required="true"]').forEach(function(g){
+      var any=g.querySelector('input[type="checkbox"]:checked');
+      g.classList.toggle('invalid',!any);
+      if(!any&&!firstBad) firstBad=g;
+    });
+    if(firstBad){
+      status.textContent='Please answer the highlighted question.';
+      status.className='survey-status err';
+      firstBad.scrollIntoView({behavior:'smooth',block:'center'});
+      return false;
+    }
+    var bad=step.querySelector(':invalid');
+    if(bad){ bad.reportValidity(); return false; }
+    return true;
+  }
+
+  function goTo(i){
+    current=i;
+    render();
+    var y=form.getBoundingClientRect().top+window.pageYOffset-90;
+    window.scrollTo({top:y<0?0:y,behavior:'smooth'});
+  }
+
+  backBtn.addEventListener('click',function(){ if(current>0) goTo(current-1); });
+  nextBtn.addEventListener('click',function(){ if(validateStep(steps[current])) goTo(current+1); });
+
+  form.addEventListener('submit',function(ev){
+    ev.preventDefault();
+    if(!validateStep(steps[current])) return;
+    syncGroups();
+    status.textContent='Sending\u2026';
+    status.className='survey-status';
+    submitBtn.disabled=true;
+    backBtn.disabled=true;
+    fetch(form.action,{method:'POST',body:new FormData(form),headers:{'Accept':'application/json'}})
+    .then(function(res){return res.json();})
+    .then(function(json){
+      if(json.success){
+        form.hidden=true;
+        document.querySelector('.progress-wrap').hidden=true;
+        document.getElementById('surveySuccess').hidden=false;
+      }else{
+        status.textContent='Something went wrong. Please email admin.edora@gmail.com.';
+        status.className='survey-status err';
+        submitBtn.disabled=false;
+        backBtn.disabled=false;
+      }
+    })
+    .catch(function(){
+      status.textContent='Network error. Please email admin.edora@gmail.com.';
+      status.className='survey-status err';
+      submitBtn.disabled=false;
+      backBtn.disabled=false;
+    });
+  });
+
+  render();
+})();
+</script>
+
+</body>
+</html>
