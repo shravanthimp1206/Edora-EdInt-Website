@@ -98,7 +98,7 @@ h1 em{font-style:normal;display:block;background:linear-gradient(120deg,var(--in
 .stop:before{content:"";position:absolute;top:50%;left:-45px;transform:translateY(-50%);width:18px;height:18px;border-radius:50%;background:var(--card);border:3px solid var(--line);z-index:1}
 .stop.now{background:var(--tint);border-color:var(--indigo)}
 .stop.now:before{background:var(--indigo);border-color:var(--tint);box-shadow:0 0 0 2px var(--indigo)}
-#roadmap-car{position:absolute;top:0;left:50%;width:44px;height:70px;z-index:10;opacity:0;pointer-events:none;transform:translateX(-50%);transition:opacity .5s ease,transform .1s ease-out;will-change:transform;filter:drop-shadow(0 10px 18px rgba(79,70,229,.45))}
+#roadmap-car{position:absolute;top:0;left:50%;width:44px;height:70px;z-index:10;opacity:0;pointer-events:none;transform:translate(-50%,-50%);transition:opacity .5s ease,top .1s ease-out;will-change:top;filter:drop-shadow(0 10px 18px rgba(79,70,229,.45))}
 #roadmap-car.visible{opacity:1}
 #roadmap-car svg{display:block;width:100%;height:100%;overflow:visible}
 .stop h3{font-size:20px;font-weight:700}.stop p{margin:6px 0 0;color:var(--mute);font-size:15.5px;line-height:1.6;letter-spacing:-.01em}
@@ -122,7 +122,7 @@ section{padding:60px 0}.links{gap:12px}.links a.h{display:none}
 .road:before{left:24px}
 .stop{padding:22px}
 .stop:before{left:-37px;width:16px;height:16px}
-#roadmap-car{width:38px;height:60px}}
+#roadmap-car{width:38px;height:60px;left:24px}}
 @media(max-width:768px){
 .wrap{padding:0 16px}
 section{padding:52px 0}
@@ -149,7 +149,7 @@ nav .wrap{height:58px;gap:10px}
 .road:before{left:20px}
 .stop{padding:18px}
 .stop:before{left:-31px;width:15px;height:15px}
-#roadmap-car{width:34px;height:54px;left:20px !important}
+#roadmap-car{width:34px;height:54px;left:20px}
 .join{padding:30px 18px;border-radius:20px;gap:24px}
 form .btn{padding:13px;font-size:15px}
 input,select{font-size:16px;padding:12px 13px}
@@ -435,7 +435,8 @@ status.style.color='#FCA5A5';
     var span=startY-endY;
     var p=span>0?(startY-rect.top)/span:0;
     p=p<0?0:(p>1?1:p);
-    car.style.transform='translate(-50%, '+(p*rect.height)+'px)';
+    if(window.innerWidth<=768){car.style.left='20px';}else{car.style.left='';}
+    car.style.top=(p*rect.height)+'px';
     if(rect.top<vh*0.9&&rect.bottom>vh*0.1){car.classList.add('visible');}
     else{car.classList.remove('visible');}
   }
