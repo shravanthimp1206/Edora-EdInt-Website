@@ -74,7 +74,7 @@ h1 em{font-style:normal;display:block;background:linear-gradient(120deg,var(--in
 .intro p span{color:var(--mute)}
 .grid{display:grid;gap:18px;margin-top:40px}
 .g3{grid-template-columns:repeat(3,1fr)}.g4{grid-template-columns:repeat(4,1fr)}
-.card{position:relative;overflow:hidden;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:26px;transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease,background-color .3s ease,color .3s ease}
+.card{position:relative;overflow:hidden;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:26px;box-shadow:0 10px 30px -10px rgba(0,0,0,.5),0 0 20px rgba(120,80,255,.05);transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease,background-color .3s ease,color .3s ease}
 .card:before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,var(--indigo),var(--violet),transparent);opacity:.85;pointer-events:none}
 .card:hover{transform:translateY(-6px);box-shadow:0 22px 46px -24px rgba(15,23,42,.30);border-color:var(--indigo)}
 .card h3{font-size:19px;font-weight:700;margin:14px 0 8px}
