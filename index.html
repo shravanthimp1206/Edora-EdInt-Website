@@ -101,6 +101,15 @@ h1 em{font-style:normal;display:block;background:linear-gradient(120deg,var(--in
 #roadmap-car{position:absolute;top:0;left:29.5px;width:44px;height:70px;z-index:10;opacity:0;pointer-events:none;transform:translate(-50%,-50%);transition:opacity .5s ease,top .1s ease-out;will-change:top;filter:drop-shadow(0 10px 18px rgba(79,70,229,.3))}
 #roadmap-car.visible{opacity:1}
 #roadmap-car svg{display:block;width:100%;height:100%;overflow:visible}
+#roadmap-rocket{position:absolute;top:0;left:29.5px;width:44px;height:70px;z-index:10;opacity:0;pointer-events:none;transform:translate(-50%,-50%) scale(.55);transition:opacity .6s ease,transform .65s cubic-bezier(.34,1.35,.64,1),top .1s ease-out;will-change:top,opacity,transform,filter;filter:drop-shadow(0 10px 18px rgba(124,58,237,.32))}
+#roadmap-rocket.visible{opacity:1;transform:translate(-50%,-50%) scale(1)}
+#roadmap-rocket svg{display:block;width:100%;height:100%;overflow:visible}
+#roadmap-rocket.is-flying{animation:rocketGlow 3.4s ease-in-out infinite}
+#roadmap-rocket.is-flying svg{animation:rocketFloat 3.4s ease-in-out infinite}
+#roadmap-rocket.is-flying .rk-flame{animation:flameFlicker 1.1s ease-in-out infinite}
+@keyframes rocketFloat{0%,100%{transform:translateY(0) rotate(-2.5deg)}50%{transform:translateY(-9px) rotate(2.5deg)}}
+@keyframes rocketGlow{0%,100%{filter:drop-shadow(0 8px 16px rgba(124,58,237,.28))}50%{filter:drop-shadow(0 16px 30px rgba(124,58,237,.5))}}
+@keyframes flameFlicker{0%,100%{opacity:1}50%{opacity:.55}}
 .stop h3{font-size:20px;font-weight:700;letter-spacing:-.02em}.stop p{margin:6px 0 0;color:var(--mute);font-size:15.5px;line-height:1.6;letter-spacing:-.01em}
 .stop.now p{color:var(--indigo-d)}
 .join{background:var(--panel);color:#fff;border:1px solid rgba(255,255,255,.08);border-radius:26px;padding:56px 44px;display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
@@ -122,7 +131,8 @@ section{padding:60px 0}.links{gap:12px}.links a.h{display:none}
 .road:before{left:24px}
 .stop{padding:22px}
 .stop:before{left:-37px;width:16px;height:16px}
-#roadmap-car{width:38px;height:60px;left:25.5px;transform:translate(-50%,-50%)}}
+#roadmap-car{width:38px;height:60px;left:25.5px;transform:translate(-50%,-50%)}
+#roadmap-rocket{width:38px;height:60px;left:25.5px}}
 @media(max-width:768px){
 .wrap{padding:0 16px}
 section{padding:52px 0}
@@ -150,6 +160,7 @@ nav .wrap{height:58px;gap:10px}
 .stop{padding:18px}
 .stop:before{left:-31px;width:15px;height:15px}
 #roadmap-car{width:34px;height:54px;left:21.5px !important;transform:translate(-50%,-50%)}
+#roadmap-rocket{width:34px;height:54px;left:21.5px !important}
 .join{padding:30px 18px;border-radius:20px;gap:24px}
 form .btn{padding:13px;font-size:15px}
 input,select{font-size:16px;padding:12px 13px}
@@ -160,7 +171,7 @@ footer{padding:24px 0 36px}
 }
 @media(max-width:480px){.links .btn{display:none}}
 @media(max-width:520px){.g4{grid-template-columns:1fr}}
-@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}#roadmap-rocket,#roadmap-rocket svg,#roadmap-rocket .rk-flame{animation:none!important}}
 </style>
 </head>
 <body>
@@ -247,6 +258,33 @@ footer{padding:24px 0 36px}
       <linearGradient id="car-body" x1="22" y1="2" x2="22" y2="68" gradientUnits="userSpaceOnUse">
         <stop stop-color="#818CF8"/>
         <stop offset="1" stop-color="#4F46E5"/>
+      </linearGradient>
+    </defs>
+  </svg>
+</div>
+<div id="roadmap-rocket" aria-hidden="true">
+  <svg width="44" height="70" viewBox="0 0 44 70" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <!-- Flame -->
+    <path class="rk-flame" d="M22 55c3.2 4.5 5 8.5 5 11.5 0 1.9-2.3 3.2-5 3.2s-5-1.3-5-3.2c0-3 1.8-7 5-11.5z" fill="url(#rocket-flame)"/>
+    <!-- Fins -->
+    <path d="M13 38c-3.5 4.5-5 11-4.5 16.5 0 0 4-.5 5.5-3L13 38z" fill="#4F46E5"/>
+    <path d="M31 38c3.5 4.5 5 11 4.5 16.5 0 0-4-.5-5.5-3L31 38z" fill="#4F46E5"/>
+    <!-- Nozzle -->
+    <path d="M16.5 48h11L26 56h-8z" fill="#334155"/>
+    <!-- Body -->
+    <path d="M22 2c-5.8 6-9.5 15-9.5 26V48h19V28C31.5 17 27.8 8 22 2z" fill="url(#rocket-body)" stroke="#6366F1" stroke-width="1.6"/>
+    <!-- Window -->
+    <circle cx="22" cy="22" r="6.2" fill="#1E293B" stroke="#A5B4FC" stroke-width="2"/>
+    <circle cx="20" cy="20" r="1.8" fill="#BFDBFE" opacity=".8"/>
+    <!-- Gradient Defs -->
+    <defs>
+      <linearGradient id="rocket-body" x1="22" y1="2" x2="22" y2="48" gradientUnits="userSpaceOnUse">
+        <stop stop-color="#EEF2FF"/>
+        <stop offset="1" stop-color="#C7D2FE"/>
+      </linearGradient>
+      <linearGradient id="rocket-flame" x1="22" y1="55" x2="22" y2="70" gradientUnits="userSpaceOnUse">
+        <stop stop-color="#FBBF24"/>
+        <stop offset="1" stop-color="#EF4444" stop-opacity="0"/>
       </linearGradient>
     </defs>
   </svg>
@@ -422,9 +460,24 @@ status.style.color='#FCA5A5';
 (function(){
   var road=document.querySelector('.road');
   var car=document.getElementById('roadmap-car');
-  if(!road||!car) return;
+  var rocket=document.getElementById('roadmap-rocket');
+  if(!road||!car||!rocket) return;
+  var stops=Array.prototype.slice.call(road.querySelectorAll('.stop'));
+  if(stops.length<3) return;
+  var centers=[0,0,0];
+  function measure(){
+    centers=stops.map(function(el){return el.offsetTop+el.offsetHeight/2;});
+  }
+  measure();
   var reduced=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if(reduced){car.style.opacity='1';return;}
+  if(reduced){
+    car.style.top=centers[0]+'px';
+    car.classList.add('visible');
+    rocket.style.top=centers[2]+'px';
+    rocket.classList.add('visible');
+    return;
+  }
+  function clamp(v){return v<0?0:(v>1?1:v);}
   var ticking=false;
   function update(){
     ticking=false;
@@ -433,15 +486,20 @@ status.style.color='#FCA5A5';
     var startY=vh*0.9;
     var endY=vh*0.15-rect.height;
     var span=startY-endY;
-    var p=span>0?(startY-rect.top)/span:0;
-    p=p<0?0:(p>1?1:p);
-    car.style.top=(p*rect.height)+'px';
-    if(rect.top<vh*0.9&&rect.bottom>vh*0.1){car.classList.add('visible');}
+    var p=clamp(span>0?(startY-rect.top)/span:0);
+    var inView=rect.top<vh*0.9&&rect.bottom>vh*0.1;
+    car.style.top=(centers[0]+(centers[1]-centers[0])*clamp(p/0.58))+'px';
+    if(inView&&p<0.72){car.classList.add('visible');}
     else{car.classList.remove('visible');}
+    var rP=clamp((p-0.55)/0.45);
+    rocket.style.top=(centers[1]+(centers[2]-centers[1])*rP)+'px';
+    if(inView&&p>0.55){rocket.classList.add('visible','is-flying');}
+    else{rocket.classList.remove('visible','is-flying');}
   }
   function onScroll(){if(!ticking){ticking=true;requestAnimationFrame(update);}}
   window.addEventListener('scroll',onScroll,{passive:true});
-  window.addEventListener('resize',onScroll,{passive:true});
+  window.addEventListener('resize',function(){measure();onScroll();},{passive:true});
+  window.addEventListener('load',function(){measure();onScroll();},{passive:true});
   update();
 })();
 </script>
