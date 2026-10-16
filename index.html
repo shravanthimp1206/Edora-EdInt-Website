@@ -57,24 +57,18 @@ h1 em{font-style:normal;display:block;background:linear-gradient(120deg,var(--in
 .cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
 .tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}
 .tags span{font-size:13px;font-weight:600;color:var(--indigo-d);background:var(--tint);border:1px solid rgba(79,70,229,.18);padding:6px 13px;border-radius:99px}
-.mock{background:rgba(15,21,38,.86);border:1px solid rgba(255,255,255,.08);border-radius:20px;padding:22px;color:#E7EAF3;box-shadow:0 24px 60px -34px rgba(15,23,42,.55);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
-.mock .top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap}
-.mock .top b{color:#fff;font-size:15.5px;font-weight:700;letter-spacing:-.02em;line-height:1.35}
-.cbse{flex:0 0 auto;display:inline-flex;align-items:center;gap:6px;font-size:11.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:#34D399;background:rgba(52,211,153,.12);border:1px solid rgba(52,211,153,.3);padding:5px 11px;border-radius:99px;white-space:nowrap}
-.cbse i{width:6px;height:6px;border-radius:50%;background:#34D399;box-shadow:0 0 8px rgba(52,211,153,.9)}
-.mock .qbox{margin-top:16px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:15px 16px}
-.mock .qtag{display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:11.5px;font-weight:600;letter-spacing:.02em;color:#A5B4FC}
-.mock .qtag s{text-decoration:none;color:#64748B}
-.mock .qtag em{font-style:normal;color:#C7D2FE;background:rgba(129,140,248,.14);border:1px solid rgba(129,140,248,.28);padding:3px 9px;border-radius:6px}
-.mock .qtext{margin:11px 0 0;font-size:15px;line-height:1.6;color:#F1F5F9;letter-spacing:-.01em}
-.mock .sol{margin-top:12px;padding:10px 12px;border-left:2px solid rgba(129,140,248,.5);background:rgba(129,140,248,.07);border-radius:0 8px 8px 0;font-size:13.5px;line-height:1.55;color:#CBD5E1}
-.mock .sol b{color:#E0E7FF;font-weight:600}
-.mock .acts{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
-.mock .acts u{display:inline-flex;align-items:center;gap:6px;text-decoration:none;font-size:12.5px;font-weight:600;color:#C7D2FE;background:rgba(129,140,248,.1);border:1px solid rgba(129,140,248,.22);padding:7px 11px;border-radius:8px}
-.mock .acts u svg{width:13px;height:13px;flex:0 0 auto;stroke:#A5B4FC;stroke-width:2.4;fill:none;stroke-linecap:round;stroke-linejoin:round}
-.mock .acts u.exp{color:#E2E8F0;background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.1)}
-.mock .acts u.exp svg{stroke:#94A3B8}
-.mock .note{font-size:12.5px;color:#64748B;margin-top:13px;letter-spacing:-.005em}
+.mock{background:var(--card);border:1px solid var(--hairline);border-radius:20px;padding:22px;box-shadow:0 20px 50px -30px rgba(15,23,42,.35)}
+.mock .top{display:flex;justify-content:space-between;align-items:center;font-size:14px;color:var(--mute);font-weight:500}
+.mock .top b{color:var(--ink);font-size:16px}
+.mock .top .live{display:inline-flex;align-items:center;gap:7px}
+.pulse{display:inline-block;width:9px;height:9px;border-radius:50%;background:#22C55E;animation:pulse 1.8s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(34,197,94,.55)}70%{box-shadow:0 0 0 9px rgba(34,197,94,0)}100%{box-shadow:0 0 0 0 rgba(34,197,94,0)}}
+.score{font-size:40px;font-weight:800;color:var(--indigo);margin:14px 0 2px;letter-spacing:-.03em}
+.bar{margin:12px 0}.bar div:first-child{display:flex;justify-content:space-between;font-size:13px;color:var(--mute);margin-bottom:5px}
+.bar span{display:block;height:8px;border-radius:9px;background:var(--tint);overflow:hidden}.bar span i{display:block;height:100%;background:var(--indigo);border-radius:9px}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+.chips u{text-decoration:none;font-size:13px;font-weight:600;background:var(--soft);border:1px solid var(--line);padding:6px 12px;border-radius:99px}
+.note{font-size:12px;color:var(--mute);margin-top:12px}
 .intro{background:linear-gradient(180deg,var(--bg) 0%,var(--tint) 55%,var(--bg) 100%);border-block:1px solid var(--line);padding:56px 0}
 .intro p{font-family:'Plus Jakarta Sans',sans-serif;font-size:clamp(20px,2.8vw,28px);font-weight:500;font-style:italic;letter-spacing:-.01em;max-width:820px;margin:0;line-height:1.6}
 .intro p span{color:var(--mute)}
@@ -125,6 +119,11 @@ h1 em{font-style:normal;display:block;background:linear-gradient(120deg,var(--in
 .join a.mail{color:#fff;font-weight:600;border-bottom:1px solid #6b72ff}
 form{display:grid;gap:12px}
 input,select{width:100%;font:inherit;font-size:15px;padding:13px 14px;border-radius:12px;border:1px solid var(--line);background:var(--card);color:var(--ink)}
+select{appearance:none;-webkit-appearance:none;-moz-appearance:none;cursor:pointer;padding-right:42px;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5 6 6.5l5-5' fill='none' stroke='%236B7280' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 15px center}
+[data-theme="dark"] select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5 6 6.5l5-5' fill='none' stroke='%2398A1B8' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")}
+select:required:invalid{color:var(--mute)}
+select option{background:var(--card);color:var(--ink)}
+select option:disabled{color:var(--mute)}
 form .btn{width:100%;padding:14px;font-size:16px}
 .ok{font-size:13px;color:#B5BBD0;margin:0}
 footer{padding:30px 0 44px;color:var(--mute);font-size:14px}
@@ -157,11 +156,7 @@ nav .wrap{height:58px;gap:10px}
 .hero .wrap{gap:32px}
 .badge{font-size:13px}
 .mock{padding:18px;border-radius:16px}
-.mock .top b{font-size:14.5px}
-.mock .qbox{padding:13px 14px}
-.mock .qtext{font-size:14px}
-.mock .sol{font-size:12.5px;padding:9px 11px}
-.mock .acts u{font-size:11.5px;padding:6px 9px}
+.score{font-size:34px}
 .grid,.price{gap:14px;margin-top:28px}
 .g3,.g4,.price{grid-template-columns:1fr}
 .card{padding:20px;border-radius:16px}
@@ -173,7 +168,8 @@ nav .wrap{height:58px;gap:10px}
 #roadmap-marker{width:34px;height:54px;left:21.5px !important}
 .join{padding:30px 18px;border-radius:20px;gap:24px}
 form .btn{padding:13px;font-size:15px}
-input,select{font-size:16px;padding:12px 13px}
+input{font-size:16px;padding:12px 13px}
+select{font-size:16px;padding:12px 40px 12px 13px}
 .cta{gap:10px}
 .cta .btn{flex:1 1 auto;text-align:center}
 .tags span{font-size:12px}
@@ -199,22 +195,15 @@ footer{padding:24px 0 36px}
 <div class="tags"><span>CBSE Classes 9–12</span><span>Science &amp; Maths</span><span>Topic-level insights</span></div>
 <div class="cta"><a class="btn" href="#join">Join the free pilot</a><a class="btn ghost" href="#solution">See how it works</a></div>
 </div>
-<div class="mock" aria-label="Sample EdInt assessment preview">
-<div class="top">
-<b>Class 9 Science • Mid-Term Assessment</b>
-<span class="cbse"><i></i>CBSE Aligned</span>
-</div>
-<div class="qbox">
-<div class="qtag"><span>Section B</span><s>•</s><span>2 Marks</span><s>•</s><em>Bloom's Taxonomy: Application</em></div>
-<p class="qtext">Q3. Calculate the molecular mass of HNO<sub>3</sub>. Show step-by-step calculations.</p>
-<div class="sol"><b>Solution:</b> H(1) + N(14) + O<sub>3</sub>(48) = 63 u</div>
-</div>
-<div class="acts">
-<u><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Marking Scheme Included</u>
-<u><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Bloom's Tagged</u>
-<u class="exp"><svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m7 10 5 5 5-5"/><path d="M12 15V3"/></svg>Export Word / PDF</u>
-</div>
-<div class="note">Generated in 15 seconds for Class 9-A</div>
+<div class="mock" aria-label="Sample EdInt exam preview">
+<div class="top"><b>Class 9 Science, Unit Test</b><span class="live"><i class="pulse"></i>Sample · live preview</span></div>
+<div class="score">96%</div>
+<div style="color:var(--mute);font-size:14px;font-weight:500">Aligned to your syllabus</div>
+<div class="bar"><div><span style="background:none;height:auto">Easy</span><span style="background:none;height:auto">40%</span></div><span><i style="width:40%"></i></span></div>
+<div class="bar"><div><span style="background:none;height:auto">Medium</span><span style="background:none;height:auto">40%</span></div><span><i style="width:40%"></i></span></div>
+<div class="bar"><div><span style="background:none;height:auto">Hard</span><span style="background:none;height:auto">20%</span></div><span><i style="width:20%"></i></span></div>
+<div class="chips"><u>Question paper</u><u>Answer key</u><u>Marking scheme</u></div>
+<div class="note">Illustrative preview of EdInt.</div>
 </div>
 </div></header>
 
@@ -358,7 +347,7 @@ footer{padding:24px 0 36px}
 <input type="hidden" name="subject" value="New Edora Pilot Waitlist Registration!">
 <input id="n" name="name" required placeholder="Your name" aria-label="Your name" autocomplete="name">
 <input id="s" name="school" required placeholder="School name" aria-label="School name">
-<select id="r" name="role" aria-label="Your role"><option>Teacher</option><option>Principal / Admin</option><option>Other</option></select>
+<select id="r" name="role" required aria-label="Your role"><option value="" disabled selected hidden>Select your role</option><option>Teacher</option><option>Principal / Admin</option><option>Other</option></select>
 <input type="text" id="role-other" name="other_role" placeholder="Please specify your role" style="display: none;" aria-label="Specify role">
 <input id="e" name="email" type="email" required placeholder="Email" aria-label="Email" autocomplete="email">
 <button class="btn" type="submit">Join the waitlist</button>
