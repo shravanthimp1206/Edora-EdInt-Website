@@ -46,6 +46,9 @@ nav .wrap{display:flex;justify-content:space-between;align-items:center;height:6
 [data-theme="dark"] .links a.survey-btn{color:#E7EAF3}
 [data-theme="dark"] .links a.survey-btn:hover{background:rgba(168,85,247,.2);border-color:rgba(167,139,250,.85);color:#fff}
 .btn{display:inline-block;background:linear-gradient(135deg,var(--indigo),var(--violet));color:#fff;font-weight:600;font-size:15px;padding:12px 22px;border-radius:12px;border:0;cursor:pointer;font-family:inherit;transition:filter .2s ease,box-shadow .2s ease,transform .15s ease}
+.btn.loading{position:relative;color:transparent;pointer-events:none}
+.btn.loading::after{content:"";position:absolute;top:50%;left:50%;width:16px;height:16px;margin:-8px 0 0 -8px;border:2px solid rgba(255,255,255,.45);border-top-color:#fff;border-radius:50%;animation:edspin .7s linear infinite}
+@keyframes edspin{to{transform:rotate(360deg)}}
 .btn:not(.ghost):hover{filter:brightness(1.12);box-shadow:0 14px 32px -12px rgba(79,70,229,.6);transform:translateY(-1px)}
 .btn.ghost{background:var(--card);color:var(--ink);border:1px solid var(--line)}
 .btn.ghost:hover{background:var(--soft)}
@@ -596,6 +599,53 @@ body.no3d .sb-note{display:inline-flex}
 var form=document.getElementById('f');
 var roleSelect=document.getElementById('r');
 var roleOther=document.getElementById('role-other');
+var PILOT_DRAFT_KEY='edora-pilot-draft';
+var pilotSubmitting=false;
+
+function pilotFields(){ return ['name','school','role','other_role','email']; }
+function pilotSaveDraft(){
+  try{
+    var data={};
+    for(var i=0;i<pilotFields().length;i++){ var el=form.elements[pilotFields()[i]]; if(el) data[pilotFields()[i]]=el.value; }
+    localStorage.setItem(PILOT_DRAFT_KEY,JSON.stringify(data));
+  }catch(e){}
+}
+function pilotClearDraft(){ try{ localStorage.removeItem(PILOT_DRAFT_KEY); }catch(e){} }
+function pilotRestoreDraft(){
+  try{
+    var raw=localStorage.getItem(PILOT_DRAFT_KEY); if(!raw) return;
+    var data=JSON.parse(raw); if(!data) return;
+    for(var i=0;i<pilotFields().length;i++){ var k=pilotFields()[i]; var el=form.elements[k]; if(el&&typeof data[k]==='string') el.value=data[k]; }
+  }catch(e){}
+}
+function pilotValidEmail(v){ return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v); }
+function pilotFormData(){
+  var fd=new FormData(form), out=new FormData();
+  fd.forEach(function(v,k){ out.append(k,typeof v==='string'?v.trim().slice(0,2000):v); });
+  return out;
+}
+function pilotSleep(ms){ return new Promise(function(r){ setTimeout(r,ms); }); }
+function pilotOnce(url,fd){
+  return fetch(url,{method:'POST',body:fd,headers:{'Accept':'application/json'}}).then(function(res){
+    return res.text().then(function(txt){ var json=null; try{ json=JSON.parse(txt); }catch(e){} return {ok:res.ok,status:res.status,json:json}; });
+  });
+}
+function pilotPostWithRetry(url,fd,onAttempt){
+  var max=3,n=0;
+  function backoff(k){ return 500*Math.pow(2,k-1)+Math.floor(Math.random()*250); }
+  function attempt(){
+    n++; if(onAttempt) onAttempt(n);
+    return pilotOnce(url,fd).then(function(r){
+      var success=r.ok&&(!r.json||r.json.success!==false);
+      if(success) return r;
+      var retryable=(r.status===429||r.status>=500||!r.json);
+      if(retryable&&n<max) return pilotSleep(backoff(n)).then(attempt);
+      return r;
+    }).catch(function(err){ if(n<max) return pilotSleep(backoff(n)).then(attempt); throw err; });
+  }
+  return attempt();
+}
+
 roleSelect.addEventListener('change',function(){
   if(roleSelect.value==='Other'){
     roleOther.style.display='block';
@@ -605,33 +655,55 @@ roleSelect.addEventListener('change',function(){
     roleOther.required=false;
     roleOther.value='';
   }
+  pilotSaveDraft();
 });
+form.addEventListener('input',pilotSaveDraft);
+form.addEventListener('change',pilotSaveDraft);
+pilotRestoreDraft();
+if(roleSelect.value==='Other'){ roleOther.style.display='block'; roleOther.required=true; }
+
 form.addEventListener('submit',function(ev){
-ev.preventDefault();
-var status=document.getElementById('formStatus');
-var btn=form.querySelector('button[type="submit"]');
-status.textContent='Sending\u2026';
-status.style.color='#B5BBD0';
-if(btn){btn.disabled=true;btn.style.opacity='.7';}
-fetch(form.action,{method:'POST',body:new FormData(form),headers:{'Accept':'application/json'}})
-.then(function(res){return res.json();})
-.then(function(json){
-if(json.success){
-form.reset();
-roleOther.style.display='none';
-roleOther.required=false;
-status.textContent='Thank you! Your registration has been sent.';
-status.style.color='#86EFAC';
-}else{
-status.textContent='Something went wrong. Please email admin.edora@gmail.com.';
-status.style.color='#FCA5A5';
-}
-})
-.catch(function(){
-status.textContent='Network error. Please email admin.edora@gmail.com.';
-status.style.color='#FCA5A5';
-})
-.finally(function(){if(btn){btn.disabled=false;btn.style.opacity='1';}});
+  ev.preventDefault();
+  if(pilotSubmitting) return;
+  var status=document.getElementById('formStatus');
+  var btn=form.querySelector('button[type="submit"]');
+  var emailEl=form.elements['email'];
+  if(!pilotValidEmail((emailEl&&emailEl.value||'').trim())){
+    if(emailEl) emailEl.focus();
+    status.textContent='Please enter a valid email address.';
+    status.style.color='#FCA5A5';
+    return;
+  }
+  if(!form.checkValidity()){ form.reportValidity(); return; }
+  pilotSubmitting=true;
+  if(btn){ btn.disabled=true; btn.classList.add('loading'); }
+  status.textContent='Sending\u2026';
+  status.style.color='#B5BBD0';
+  pilotPostWithRetry(form.action,pilotFormData(),function(n){
+    if(n>1){ status.textContent='Retrying\u2026 (attempt '+n+' of 3)'; }
+  })
+  .then(function(r){
+    var success=r.ok&&(!r.json||r.json.success!==false);
+    if(success){
+      form.reset();
+      roleOther.style.display='none';
+      roleOther.required=false;
+      pilotClearDraft();
+      status.textContent='Thank you! Your registration has been sent.';
+      status.style.color='#86EFAC';
+    }else{
+      status.textContent=(r.json&&r.json.message)?r.json.message:'Something went wrong. Please email admin.edora@gmail.com.';
+      status.style.color='#FCA5A5';
+    }
+  })
+  .catch(function(){
+    status.textContent='Network error after retries. Please email admin.edora@gmail.com.';
+    status.style.color='#FCA5A5';
+  })
+  .finally(function(){
+    pilotSubmitting=false;
+    if(btn){ btn.disabled=false; btn.classList.remove('loading'); }
+  });
 });
 </script>
 
