@@ -16,6 +16,8 @@ box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:en
 html{background:var(--bg);scroll-behavior:smooth;scroll-padding-top:80px;transition:background-color .3s ease}
 *,*:before,*:after{box-sizing:inherit}
 body{margin:0;background:transparent;color:var(--ink);font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.6;letter-spacing:-.01em;-webkit-font-smoothing:antialiased;overflow-x:hidden;transition:color .3s ease}
+body::before{content:"";position:fixed;inset:0;z-index:-2;pointer-events:none;background:radial-gradient(60% 50% at 15% 10%,color-mix(in srgb,var(--indigo) 15%,transparent),transparent 70%),radial-gradient(55% 45% at 85% 18%,color-mix(in srgb,var(--violet) 13%,transparent),transparent 72%),radial-gradient(75% 65% at 50% 112%,color-mix(in srgb,var(--indigo) 11%,transparent),transparent 75%)}
+body.has3d::before{display:none}
 html{cursor:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Cg transform='translate(9.9 9.9) rotate(-45)'%3E%3Cpath d='M0 6C2 9 2 12 0 15C-2 12-2 9 0 6Z' fill='%23FBBF24'/%3E%3Cpath d='M-3 3L-7 10L-3 10Z' fill='%23EF4444'/%3E%3Cpath d='M3 3L7 10L3 10Z' fill='%23EF4444'/%3E%3Cpath d='M0-14C4-9 4-2 3 6L-3 6C-4-2-4-9 0-14Z' fill='%23E2E8F0' stroke='%230F172A' stroke-width='1.2' stroke-linejoin='round'/%3E%3Ccircle cx='0' cy='-4' r='2.2' fill='%2338BDF8' stroke='%230F172A' stroke-width='1'/%3E%3C/g%3E%3C/svg%3E") 0 0, auto}
 a,button,.btn,.theme-toggle,.foot-soc,select,.stop,.card,summary,label[for],[role="button"]{cursor:pointer}
 input,textarea{cursor:text}
@@ -265,6 +267,7 @@ body.has3d .exp-storyboard,body.trying3d .exp-storyboard{display:none}
 #exp-canvas.on:not(.dim){opacity:.82}
 #intro #exp-canvas{position:absolute;inset:0;z-index:1;opacity:0}
 #intro #exp-canvas.on{opacity:1}
+body.no3d #exp-canvas{display:none}
 .exp-fade{position:absolute;inset:0;z-index:2;background:var(--soft);opacity:0;pointer-events:none}
 .exp-sticky::before,.exp-sticky::after{content:"";position:absolute;left:0;right:0;height:64px;z-index:5;pointer-events:none}
 .exp-sticky::before{top:0;background:linear-gradient(180deg,var(--soft),transparent)}
@@ -824,24 +827,54 @@ status.style.color='#FCA5A5';
 (function(){
   if(window.Edora3D&&window.Edora3D.whenThree) return;
   var URL='https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js';
-  var renderer=null,loading=false,pending=[];
+  var renderer=null,loading=false,pending=[],timer=null,dead=false;
+  function hasWebGL(){
+    try{
+      if(window.WEBGL&&typeof window.WEBGL.isWebGLAvailable==='function') return window.WEBGL.isWebGLAvailable();
+      var c=document.createElement('canvas');
+      return !!(window.WebGLRenderingContext&&(c.getContext('webgl')||c.getContext('experimental-webgl')));
+    }catch(e){ return false; }
+  }
+  function poorNet(){
+    try{
+      var c=navigator.connection||navigator.mozConnection||navigator.webkitConnection;
+      if(!c) return false;
+      if(c.saveData) return true;
+      var et=c.effectiveType||'';
+      if(et==='slow-2g'||et==='2g') return true;
+      if(et==='3g'&&typeof c.downlink==='number'&&c.downlink<0.5) return true;
+      if(typeof c.rtt==='number'&&c.rtt>1000) return true;
+      return false;
+    }catch(e){ return false; }
+  }
+  function flush(failed){
+    if(timer){ window.clearTimeout(timer); timer=null; }
+    var q=pending; pending=[]; loading=false;
+    var ok=!failed&&!!window.THREE;
+    if(!ok) dead=true;
+    for(var i=0;i<q.length;i++){ var cb=ok?q[i].ok:q[i].bad; if(cb) try{ cb(); }catch(e){} }
+  }
   function whenThree(ok,bad){
-    if(window.THREE){ if(ok) ok(); return; }
+    if(window.THREE){ if(ok) try{ ok(); }catch(e){} return; }
+    if(dead){ if(bad) try{ bad(); }catch(e){} return; }
     pending.push({ok:ok,bad:bad});
     if(loading) return;
     loading=true;
     var s=document.createElement('script');
     s.src=URL; s.async=true;
-    s.onload=function(){ var q=pending; pending=[]; for(var i=0;i<q.length;i++){ if(window.THREE){ if(q[i].ok) try{q[i].ok();}catch(e){} } else { if(q[i].bad) try{q[i].bad();}catch(e){} } } };
-    s.onerror=function(){ var q=pending; pending=[]; for(var i=0;i<q.length;i++){ if(q[i].bad) try{q[i].bad();}catch(e){} } };
+    s.onload=function(){ flush(false); };
+    s.onerror=function(){ flush(true); };
+    timer=window.setTimeout(function(){ if(!window.THREE) flush(true); },8000);
     document.head.appendChild(s);
   }
   function getRenderer(canvas,opts){
     if(renderer) return renderer;
     var T=window.THREE; if(!T||!canvas) return null;
-    var o={canvas:canvas}; if(opts){ for(var k in opts){ if(opts.hasOwnProperty(k)) o[k]=opts[k]; } }
-    renderer=new T.WebGLRenderer(o);
-    return renderer;
+    try{
+      var o={canvas:canvas}; if(opts){ for(var k in opts){ if(opts.hasOwnProperty(k)) o[k]=opts[k]; } }
+      renderer=new T.WebGLRenderer(o);
+      return renderer;
+    }catch(e){ renderer=null; return null; }
   }
   function onIntroDone(cb){
     if(window.Edora3D.introFinished){ try{cb();}catch(e){} return; }
@@ -853,7 +886,7 @@ status.style.color='#FCA5A5';
     var q=E._done; E._done=[];
     for(var i=0;i<q.length;i++){ try{q[i]();}catch(e){} }
   }
-  window.Edora3D={url:URL,getRenderer:getRenderer,whenThree:whenThree,onIntroDone:onIntroDone,finishIntro:finishIntro,introActive:false,introFinished:false,_done:[]};
+  window.Edora3D={url:URL,getRenderer:getRenderer,whenThree:whenThree,onIntroDone:onIntroDone,finishIntro:finishIntro,hasWebGL:hasWebGL,poorNet:poorNet,introActive:false,introFinished:false,_done:[]};
 })();
 </script>
 
@@ -875,10 +908,11 @@ status.style.color='#FCA5A5';
   var touch=('ontouchstart' in window)||(navigator.maxTouchPoints||0)>0;
 
   function hideLoader(){ if(loader) loader.classList.add('off'); }
-  function hasWebGL(){ try{ var c=document.createElement('canvas'); return !!(window.WebGLRenderingContext&&(c.getContext('webgl')||c.getContext('experimental-webgl'))); }catch(e){ return false; } }
+  function hasWebGL(){ return (window.Edora3D&&window.Edora3D.hasWebGL)?window.Edora3D.hasWebGL():false; }
+  function poorNet(){ return !!(window.Edora3D&&window.Edora3D.poorNet&&window.Edora3D.poorNet()); }
   function fallback(){ document.body.classList.remove('trying3d'); document.body.classList.add('no3d'); hideLoader(); }
 
-  if(reduced||!hasWebGL()){ fallback(); return; }
+  if(reduced||!hasWebGL()||poorNet()){ fallback(); return; }
   document.body.classList.add('trying3d');
 
   var THREE_URL='https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js';
@@ -1242,7 +1276,7 @@ status.style.color='#FCA5A5';
     var THREE=window.THREE;
     renderer=(window.Edora3D&&window.Edora3D.getRenderer)?window.Edora3D.getRenderer(canvas,{antialias:!lowPower&&!smallScreen,alpha:true,powerPreference:'high-performance'}):new THREE.WebGLRenderer({canvas:canvas,antialias:!lowPower&&!smallScreen,alpha:true,powerPreference:'high-performance'});
     if(!renderer) throw new Error('no-renderer');
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio||1,2));
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio||1,lowPower?1.5:2));
     if('outputEncoding' in renderer) renderer.outputEncoding=THREE.sRGBEncoding;
     renderer.setClearColor(0x000000,0);
     scene=new THREE.Scene();
@@ -1497,8 +1531,10 @@ status.style.color='#FCA5A5';
   E.introActive=true;
   var smallScreen=window.innerWidth<=760;
   var touch=('ontouchstart' in window)||(navigator.maxTouchPoints||0)>0;
+  var lowPower=((navigator.hardwareConcurrency||8)<=4)||((navigator.deviceMemory||8)<=4);
   function isDark(){ return document.documentElement.getAttribute('data-theme')==='dark'; }
-  function hasWebGL(){ try{ var c=document.createElement('canvas'); return !!(window.WebGLRenderingContext&&(c.getContext('webgl')||c.getContext('experimental-webgl'))); }catch(e){ return false; } }
+  function hasWebGL(){ return (window.Edora3D&&window.Edora3D.hasWebGL)?window.Edora3D.hasWebGL():(function(){ try{ var c=document.createElement('canvas'); return !!(window.WEBGL&&window.WEBGL.isWebGLAvailable?window.WEBGL.isWebGLAvailable():(window.WebGLRenderingContext&&(c.getContext('webgl')||c.getContext('experimental-webgl')))); }catch(e){ return false; } })(); }
+  function poorNet(){ return !!(window.Edora3D&&window.Edora3D.poorNet&&window.Edora3D.poorNet()); }
   var expCanvas=document.getElementById('exp-canvas');
   var expParent=expCanvas?expCanvas.parentNode:null;
   var expNext=expCanvas?expCanvas.nextSibling:null;
@@ -1593,7 +1629,7 @@ status.style.color='#FCA5A5';
   function buildField(T){
     var renderer=E.getRenderer(expCanvas,{antialias:true,alpha:true,powerPreference:'high-performance'});
     if(!renderer) return null;
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio||1,2));
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio||1,lowPower?1.5:2));
     if('outputEncoding' in renderer) renderer.outputEncoding=T.sRGBEncoding;
     renderer.setClearColor(0x000000,0);
     var scene=new T.Scene();
@@ -1755,7 +1791,7 @@ status.style.color='#FCA5A5';
   if(startBtn) startBtn.addEventListener('click',startExperience);
   if(skipBtn) skipBtn.addEventListener('click',skip);
 
-  if(E.whenThree&&!reduced&&hasWebGL()){
+  if(E.whenThree&&!reduced&&!poorNet()&&hasWebGL()){
     E.whenThree(function(){
       try{
         if(expCanvas&&expParent){ expParent.removeChild(expCanvas); intro.insertBefore(expCanvas,intro.firstChild); expCanvas.classList.add('on'); }
