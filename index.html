@@ -259,6 +259,9 @@ body.intro-lock{overflow:hidden}
 .intro-note kbd{font-family:inherit;font-size:11px;font-weight:700;padding:2px 7px;border:1px solid var(--line);border-bottom-width:2px;border-radius:6px;background:var(--soft);color:var(--ink)}
 .intro-skip{position:absolute;left:50%;bottom:clamp(22px,5vh,44px);transform:translateX(-50%);z-index:4;font-family:inherit;font-size:13px;font-weight:600;letter-spacing:.01em;color:var(--mute);background:transparent;border:0;cursor:pointer;padding:9px 16px;border-radius:10px;transition:color .25s ease,background-color .25s ease}
 .intro-skip:hover,.intro-skip:focus-visible{color:var(--ink);background:var(--tint);outline:none}
+.desktop-skip-hint{display:block}
+@media(max-width:768px){.desktop-skip-hint{display:none}.intro-skip{padding:13px 22px;min-height:44px;font-size:14px}}
+@media(pointer:coarse){.desktop-skip-hint{display:none}.intro-skip{padding:13px 22px;min-height:44px}}
 /* ---- Pinned 3D fly-through ---- */
 .exp-track{display:none;position:relative;height:340vh}
 body.has3d .exp-track,body.trying3d .exp-track{display:block}
@@ -358,7 +361,7 @@ body.no3d .sb-note{display:inline-flex}
 <div class="logo intro-mark" aria-hidden="true"><i>E</i><b>Ed<span>ora</span></b></div>
 <p class="intro-tag">Less paperwork. More teaching.</p>
 <button class="btn" type="button" id="introEnter">Enter Edora</button>
-<p class="intro-note">Press <kbd>Esc</kbd> to skip</p>
+<p class="intro-note desktop-skip-hint">Press <kbd>Esc</kbd> to skip</p>
 </div>
 </div>
 <nav><div class="wrap">
