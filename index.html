@@ -24,7 +24,7 @@ input,textarea{cursor:text}
 input[type="submit"],input[type="button"],input[type="checkbox"],input[type="radio"]{cursor:pointer}
 #water-canvas{position:fixed;top:0;left:0;width:100vw;height:100vh;pointer-events:none;z-index:9999}
 #thrust-canvas{position:fixed;top:0;left:0;width:100vw;height:100vh;pointer-events:none;z-index:9998}
-nav,footer,.mock,.join,.tags span,.btn.ghost,input,select{transition:background-color .3s ease,color .3s ease,border-color .3s ease}
+nav,footer,.mock,.join,.btn.ghost,input,select{transition:background-color .3s ease,color .3s ease,border-color .3s ease}
 [data-theme="dark"] .btn:not(.ghost),[data-theme="dark"] .live .tag{color:#0B0F19}
 [data-theme="dark"] .card:hover .ic svg{stroke:#0B0F19}
 a{color:inherit;text-decoration:none}
@@ -77,8 +77,6 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{ou
 h1{font-size:clamp(40px,6.4vw,68px);font-weight:700;margin:20px 0 18px}
 h1 em{font-style:normal;display:block;background:linear-gradient(120deg,var(--indigo),var(--violet));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent}
 .cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
-.tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}
-.tags span{font-size:13px;font-weight:600;color:var(--indigo-d);background:var(--tint);border:1px solid rgba(79,70,229,.18);padding:6px 13px;border-radius:99px}
 .mock{background:var(--card);border:1px solid var(--hairline);border-radius:20px;padding:22px;box-shadow:0 20px 50px -30px rgba(15,23,42,.35)}
 html:not([data-theme="dark"]) .mock{border-color:#1e1b4b;box-shadow:0 20px 25px -5px rgba(0,0,0,.15)}
 .mock .top{display:flex;justify-content:space-between;align-items:center;font-size:14px;color:var(--mute);font-weight:500}
@@ -212,7 +210,6 @@ input{font-size:16px;padding:12px 13px}
 select{font-size:16px;padding:12px 40px 12px 13px}
 .cta{gap:10px}
 .cta .btn{flex:1 1 auto;text-align:center}
-.tags span{font-size:12px}
 footer{padding:44px 0 26px}
 .foot-grid{grid-template-columns:1fr 1fr;gap:34px 24px}
 .foot-brand{grid-column:1/-1;max-width:none}
@@ -419,7 +416,6 @@ body.no3d .sb-note{display:inline-flex}
 <span class="badge">Pilot open now · CBSE schools</span>
 <h1>Less paperwork.<em>More teaching.</em></h1>
 <p class="lead">Edora takes the admin off a teacher's plate, starting with exams. Set a balanced paper in minutes, then see exactly where each student is stuck.</p>
-<div class="tags"><span>CBSE Classes 9–12</span><span>Science &amp; Maths</span><span>Topic-level insights</span></div>
 <div class="cta"><a class="btn" href="#join">Join the free pilot</a><a class="btn ghost" href="#solution">See how it works</a></div>
 </div>
 <div class="mock" aria-label="Sample EdInt exam preview">
