@@ -2004,127 +2004,44 @@ form.addEventListener('submit',function(ev){
   var ROADMAP={label:"Roadmap",href:"#roadmap"};
   var SOLUTION={label:"Explore Edora",href:"#solution"};
 
-  var A_PRICE="Pricing is usage-based with no baseline fee, and will be announced later. Pilot Phase 1 is free. Setup, implementation and data migration are also free.";
+  // Full-text index generated from edint-knowledge-base.md. Every chunk comes from the document.
+  var DOC_CHUNKS=[{"sec":"Purpose","sub":"","kind":"rules","title":"EdInt Knowledge Base (for the Edora website chatbot)","text":"EdInt Knowledge Base (for the Edora website chatbot)"},{"sec":"Purpose","sub":"","kind":"rules","title":"Purpose: single source of truth about Edora and EdInt. The chatbot must answer ONLY from t","text":"Purpose: single source of truth about Edora and EdInt. The chatbot must answer ONLY from this document. If something is not covered here, it should say it isn't sure and point the visitor to admin.edora@gmail.com. Never invent features, prices, dates or numbers."},{"sec":"Bot rules (read first)","sub":"","kind":"rules","title":"Bot rules (read first)","text":"Tone: friendly, clear, concise, easy for any teacher or school leader to understand. No jargon.\n• Never call Edora's admin product an \"ERP\". Say \"core admin and workflow management\".\n• Never claim a feature is live if it is listed under \"In progress\" or \"Planned\".\n• Never quote prices. Pricing is not finalized (see section 8).\n• Do not call the rule-based insights \"AI\". Describe them as \"smart, rule-based insights\".\n• The pilot is for CBSE schools and teachers only. Do not promise availability for other boards.\n• Stay on topic: Edora and EdInt only. Politely decline unrelated questions.\n• If unsure, say so and share the contact email: admin.edora@gmail.com."},{"sec":"Bot rules (read first)","sub":"","kind":"rules","title":"Tone: friendly, clear, concise, easy for any teacher or school leader to understand. No jargon.","text":"Tone: friendly, clear, concise, easy for any teacher or school leader to understand. No jargon."},{"sec":"Bot rules (read first)","sub":"","kind":"rules","title":"Never call Edora's admin product an \"ERP\". Say \"core admin and workflow management\".","text":"Never call Edora's admin product an \"ERP\". Say \"core admin and workflow management\"."},{"sec":"Bot rules (read first)","sub":"","kind":"rules","title":"Never claim a feature is live if it is listed under \"In progress\" or \"Planned\".","text":"Never claim a feature is live if it is listed under \"In progress\" or \"Planned\"."},{"sec":"Bot rules (read first)","sub":"","kind":"rules","title":"Never quote prices. Pricing is not finalized (see section 8).","text":"Never quote prices. Pricing is not finalized (see section 8)."},{"sec":"Bot rules (read first)","sub":"","kind":"rules","title":"Do not call the rule-based insights \"AI\". Describe them as \"smart, rule-based insights\".","text":"Do not call the rule-based insights \"AI\". Describe them as \"smart, rule-based insights\"."},{"sec":"Bot rules (read first)","sub":"","kind":"rules","title":"The pilot is for CBSE schools and teachers only. Do not promise availability for other boards.","text":"The pilot is for CBSE schools and teachers only. Do not promise availability for other boards."},{"sec":"Bot rules (read first)","sub":"","kind":"rules","title":"Stay on topic: Edora and EdInt only. Politely decline unrelated questions.","text":"Stay on topic: Edora and EdInt only. Politely decline unrelated questions."},{"sec":"Bot rules (read first)","sub":"","kind":"rules","title":"If unsure, say so and share the contact email: admin.edora@gmail.com.","text":"If unsure, say so and share the contact email: admin.edora@gmail.com."},{"sec":"About Edora","sub":"","kind":"about","title":"About Edora","text":"Edora builds educational software for schools, teachers and students.\n• Long-term vision: \"the operating system for schools.\" Clarification: think Microsoft Office, not Windows. It is an app store of purpose-built school apps that a school plugs in as needed, not a literal operating system.\n• Modular, plug-in model: schools don't pay a baseline fee. They only pay for what they use.\n• Setup and implementation are free. Only usage is charged.\n• Data migration is free into and out of Edora. If a school stops using Edora, its data is returned securely.\n• Mission: eliminate teachers' non-academic admin workload and make academic work more efficient.\n• Team: Srijith Arumugam (Founder), Shravanthi M P (Co-founder), Jayanthi Rajapurmath (Advisor, Technology), Jyothsna Yalapalli (Advisor, Marketing & Sales).\n• Tagline: \"Building the operating system for schools, together.\"\n• Edora is bootstrapped."},{"sec":"About Edora","sub":"","kind":"about","title":"Edora builds educational software for schools, teachers and students.","text":"Edora builds educational software for schools, teachers and students."},{"sec":"About Edora","sub":"","kind":"about","title":"Long-term vision: \"the operating system for schools.\" Clarification: think Microsoft Office, not Windows. It is an app store of purpose-built school apps that a","text":"Long-term vision: \"the operating system for schools.\" Clarification: think Microsoft Office, not Windows. It is an app store of purpose-built school apps that a school plugs in as needed, not a literal operating system."},{"sec":"About Edora","sub":"","kind":"about","title":"Modular, plug-in model: schools don't pay a baseline fee. They only pay for what they use.","text":"Modular, plug-in model: schools don't pay a baseline fee. They only pay for what they use."},{"sec":"About Edora","sub":"","kind":"about","title":"Setup and implementation are free. Only usage is charged.","text":"Setup and implementation are free. Only usage is charged."},{"sec":"About Edora","sub":"","kind":"about","title":"Data migration is free into and out of Edora. If a school stops using Edora, its data is returned securely.","text":"Data migration is free into and out of Edora. If a school stops using Edora, its data is returned securely."},{"sec":"About Edora","sub":"","kind":"about","title":"Mission: eliminate teachers' non-academic admin workload and make academic work more efficient.","text":"Mission: eliminate teachers' non-academic admin workload and make academic work more efficient."},{"sec":"About Edora","sub":"","kind":"about","title":"Team: Srijith Arumugam (Founder), Shravanthi M P (Co-founder), Jayanthi Rajapurmath (Advisor, Technology), Jyothsna Yalapalli (Advisor, Marketing & Sales).","text":"Team: Srijith Arumugam (Founder), Shravanthi M P (Co-founder), Jayanthi Rajapurmath (Advisor, Technology), Jyothsna Yalapalli (Advisor, Marketing & Sales)."},{"sec":"About Edora","sub":"","kind":"about","title":"Tagline: \"Building the operating system for schools, together.\"","text":"Tagline: \"Building the operating system for schools, together.\""},{"sec":"About Edora","sub":"","kind":"about","title":"Edora is bootstrapped.","text":"Edora is bootstrapped."},{"sec":"About Edora","sub":"Edora's modules (long term)","kind":"modules","title":"Edora's modules (long term)","text":"Edora's modules: 1. Core admin and workflow management (under development, not yet complete).\n2. EdInt, the assessment engine (first product; v1 is ready).\n3. Student extracurricular discovery platform (future)."},{"sec":"The problem Edora solves","sub":"","kind":"problem","title":"The problem Edora solves","text":"Teachers spend much of their time on administrative and academic paperwork instead of teaching.\n• Schools face high operational costs.\n• Students lack access to extracurricular opportunities.\n• Result: teachers are stretched, families lean on expensive coaching instead of self-study, and students struggle to build the profile needed for opportunities such as studying abroad."},{"sec":"The problem Edora solves","sub":"","kind":"problem","title":"Teachers spend much of their time on administrative and academic paperwork instead of teaching.","text":"Teachers spend much of their time on administrative and academic paperwork instead of teaching."},{"sec":"The problem Edora solves","sub":"","kind":"problem","title":"Schools face high operational costs.","text":"Schools face high operational costs."},{"sec":"The problem Edora solves","sub":"","kind":"problem","title":"Students lack access to extracurricular opportunities.","text":"Students lack access to extracurricular opportunities."},{"sec":"The problem Edora solves","sub":"","kind":"problem","title":"Result: teachers are stretched, families lean on expensive coaching instead of self-study, and students struggle to build the profile needed for opportunities s","text":"Result: teachers are stretched, families lean on expensive coaching instead of self-study, and students struggle to build the profile needed for opportunities such as studying abroad."},{"sec":"What is EdInt?","sub":"","kind":"edint","title":"What is EdInt?","text":"EdInt = Education Intelligence.\n• EdInt is Edora's assessment engine. It helps teachers create exams quickly and gives deep, per-student insights.\n• It is built for teachers and schools (CBSE-first).\n• One line: \"EdInt streamlines assessments with deep per-student insights.\""},{"sec":"What is EdInt?","sub":"","kind":"edint","title":"EdInt = Education Intelligence.","text":"EdInt = Education Intelligence."},{"sec":"What is EdInt?","sub":"","kind":"edint","title":"EdInt is Edora's assessment engine. It helps teachers create exams quickly and gives deep, per-student insights.","text":"EdInt is Edora's assessment engine. It helps teachers create exams quickly and gives deep, per-student insights."},{"sec":"What is EdInt?","sub":"","kind":"edint","title":"It is built for teachers and schools (CBSE-first).","text":"It is built for teachers and schools (CBSE-first)."},{"sec":"What is EdInt?","sub":"","kind":"edint","title":"One line: \"EdInt streamlines assessments with deep per-student insights.\"","text":"One line: \"EdInt streamlines assessments with deep per-student insights.\""},{"sec":"What is EdInt?","sub":"How EdInt works: blueprint-driven exams","kind":"process","title":"EdInt does not just ask a chatbot to write a paper. It follows a structured process:","text":"EdInt does not just ask a chatbot to write a paper. It follows a structured process:"},{"sec":"What is EdInt?","sub":"How EdInt works: blueprint-driven exams","kind":"process","title":"How EdInt works: blueprint-driven exams","text":"1. Teacher configures the exam: board, class, subject, chapters, total marks, duration, number of questions, difficulty mix, question-type mix, and number of variants.\n2. Blueprint Engine builds a structured exam blueprint.\n3. Blueprint Review screen: the teacher reviews the blueprint in a clean interface.\n4. Question Selection Engine picks questions from a structured question bank to meet the marks, difficulty, question types and chapter coverage, while avoiding duplicates.\n5. Outputs generated: question paper, answer key and marking scheme.\n6. Blueprint Compliance Engine scores how closely the final exam matches the blueprint.\n7. Examination Review screen lets the teacher check everything before using it."},{"sec":"What is EdInt?","sub":"Honest handling when the question bank is limited","kind":"process","title":"If the question bank cannot fully satisfy a blueprint, EdInt builds the closest possible e","text":"If the question bank cannot fully satisfy a blueprint, EdInt builds the closest possible exam, calculates the actual compliance score, and alerts the teacher. It never silently produces a misleading result."},{"sec":"EdInt feature status","sub":"Live in EdInt v1","kind":"live","title":"Live in EdInt v1","text":"Live in EdInt v1: Dashboard and dark mode\n• Exam configuration\n• Blueprint generation and review\n• Structured question bank and question filtering\n• Question Selection Engine\n• Question paper, answer key and marking scheme generation\n• Examination review screen\n• Blueprint compliance analysis\n• Graceful handling of insufficient question coverage\n• Multi-variant exam generation UI"},{"sec":"EdInt feature status","sub":"Teacher insights suite (built and tested)","kind":"insights","title":"Nine analytics pages for teachers: 1. Chapter Intelligence 2. Question Trends 3. Exam Patt","text":"Nine analytics pages for teachers: 1. Chapter Intelligence 2. Question Trends 3. Exam Patterns 4. Question Bank Health 5. Student Profiles 6. Class Analytics (with PDF export) 7. Smart, rule-based Insights (with 3 presets) 8. Practice Generator 9. Adaptive Demo"},{"sec":"EdInt feature status","sub":"Teacher insights suite (built and tested)","kind":"insights","title":"Also available: join-code Adaptive Live Practice sessions, where students join a live prac","text":"Also available: join-code Adaptive Live Practice sessions, where students join a live practice session through a public practice page."},{"sec":"EdInt feature status","sub":"In progress (improving now)","kind":"progress","title":"In progress (improving now)","text":"In progress (being improved now): Dynamic number of variants (no fixed Paper A/B/C limit)\n• True question diversity between variants (later variants prefer unused questions)\n• Variant similarity/overlap analysis\n• Better explanations when there aren't enough eligible questions\n• Teacher-side dropdowns limited to subjects and chapters actually assigned to that teacher\n• Immediate PDF download of generated exams and variants, with school logo and name preset by the admin\n• Clearer explanation of integrity score changes, and an easier flow for teachers to correct and publish results to students"},{"sec":"EdInt feature status","sub":"In progress (improving now)","kind":"progress","title":"Dynamic number of variants (no fixed Paper A/B/C limit)","text":"In progress (being improved now): Dynamic number of variants (no fixed Paper A/B/C limit)"},{"sec":"EdInt feature status","sub":"In progress (improving now)","kind":"progress","title":"True question diversity between variants (later variants prefer unused questions)","text":"In progress (being improved now): True question diversity between variants (later variants prefer unused questions)"},{"sec":"EdInt feature status","sub":"In progress (improving now)","kind":"progress","title":"Variant similarity/overlap analysis","text":"In progress (being improved now): Variant similarity/overlap analysis"},{"sec":"EdInt feature status","sub":"In progress (improving now)","kind":"progress","title":"Better explanations when there aren't enough eligible questions","text":"In progress (being improved now): Better explanations when there aren't enough eligible questions"},{"sec":"EdInt feature status","sub":"In progress (improving now)","kind":"progress","title":"Teacher-side dropdowns limited to subjects and chapters actually assigned to that teacher","text":"In progress (being improved now): Teacher-side dropdowns limited to subjects and chapters actually assigned to that teacher"},{"sec":"EdInt feature status","sub":"In progress (improving now)","kind":"progress","title":"Immediate PDF download of generated exams and variants, with school logo and name preset by the admin","text":"In progress (being improved now): Immediate PDF download of generated exams and variants, with school logo and name preset by the admin"},{"sec":"EdInt feature status","sub":"In progress (improving now)","kind":"progress","title":"Clearer explanation of integrity score changes, and an easier flow for teachers to correct and publish results to students","text":"In progress (being improved now): Clearer explanation of integrity score changes, and an easier flow for teachers to correct and publish results to students"},{"sec":"EdInt feature status","sub":"Planned (not available yet)","kind":"planned","title":"Planned (not available yet)","text":"Planned (not available yet): PDF export of variants\n• Online exam publishing\n• Student exam-taking interface (students log into their own portal)\n• Automated evaluation (objective and descriptive)\n• Dual evaluation shown side by side to students: teacher grading plus machine correction\n• Assessment analytics\n• Personal per-teacher question bank alongside the shared question bank\n• Live real-time proctoring\n• MCQ worksheet generator where each wrong option reflects a specific common student mistake, so a student's choice reveals their learning gap\n• A large, curriculum-based question bank built through an automated ingestion pipeline (codename \"Hermes Agent\", under development)"},{"sec":"EdInt feature status","sub":"Planned (not available yet)","kind":"planned","title":"PDF export of variants","text":"Planned (not available yet): PDF export of variants"},{"sec":"EdInt feature status","sub":"Planned (not available yet)","kind":"planned","title":"Online exam publishing","text":"Planned (not available yet): Online exam publishing"},{"sec":"EdInt feature status","sub":"Planned (not available yet)","kind":"planned","title":"Student exam-taking interface (students log into their own portal)","text":"Planned (not available yet): Student exam-taking interface (students log into their own portal)"},{"sec":"EdInt feature status","sub":"Planned (not available yet)","kind":"planned","title":"Automated evaluation (objective and descriptive)","text":"Planned (not available yet): Automated evaluation (objective and descriptive)"},{"sec":"EdInt feature status","sub":"Planned (not available yet)","kind":"planned","title":"Dual evaluation shown side by side to students: teacher grading plus machine correction","text":"Planned (not available yet): Dual evaluation shown side by side to students: teacher grading plus machine correction"},{"sec":"EdInt feature status","sub":"Planned (not available yet)","kind":"planned","title":"Assessment analytics","text":"Planned (not available yet): Assessment analytics"},{"sec":"EdInt feature status","sub":"Planned (not available yet)","kind":"planned","title":"Personal per-teacher question bank alongside the shared question bank","text":"Planned (not available yet): Personal per-teacher question bank alongside the shared question bank"},{"sec":"EdInt feature status","sub":"Planned (not available yet)","kind":"planned","title":"Live real-time proctoring","text":"Planned (not available yet): Live real-time proctoring"},{"sec":"EdInt feature status","sub":"Planned (not available yet)","kind":"planned","title":"MCQ worksheet generator where each wrong option reflects a specific common student mistake, so a student's choice reveals their learning gap","text":"Planned (not available yet): MCQ worksheet generator where each wrong option reflects a specific common student mistake, so a student's choice reveals their learning gap"},{"sec":"EdInt feature status","sub":"Planned (not available yet)","kind":"planned","title":"A large, curriculum-based question bank built through an automated ingestion pipeline (codename \"Hermes Agent\", under development)","text":"Planned (not available yet): A large, curriculum-based question bank built through an automated ingestion pipeline (codename \"Hermes Agent\", under development)"},{"sec":"EdInt feature status","sub":"Intelligence roadmap","kind":"roadmap","title":"Intelligence roadmap","text":"Intelligence roadmap: Phase 1: chapter, question-bank and exam-pattern intelligence\n• Phase 2: student performance and mistake-pattern intelligence\n• Phase 3: recommendations, personalized practice, adaptive assessment and exam-readiness prediction"},{"sec":"EdInt feature status","sub":"Intelligence roadmap","kind":"roadmap","title":"Phase 1: chapter, question-bank and exam-pattern intelligence","text":"Intelligence roadmap: Phase 1: chapter, question-bank and exam-pattern intelligence"},{"sec":"EdInt feature status","sub":"Intelligence roadmap","kind":"roadmap","title":"Phase 2: student performance and mistake-pattern intelligence","text":"Intelligence roadmap: Phase 2: student performance and mistake-pattern intelligence"},{"sec":"EdInt feature status","sub":"Intelligence roadmap","kind":"roadmap","title":"Phase 3: recommendations, personalized practice, adaptive assessment and exam-readiness prediction","text":"Intelligence roadmap: Phase 3: recommendations, personalized practice, adaptive assessment and exam-readiness prediction"},{"sec":"Current limitations (be honest)","sub":"","kind":"limitation","title":"Current limitations (be honest)","text":"Current limitation: The question bank is currently a starter/sample dataset. A much larger bank is planned.\n• The core admin and workflow product is still being built.\n• Handwriting-to-text evaluation and hardware (such as stylus or smartpen) are not part of the current product. They are future ideas and would be opt-in per school.\n• The platform is in pilot stage, not a finished public launch."},{"sec":"Current limitations (be honest)","sub":"","kind":"limitation","title":"The question bank is currently a starter/sample dataset. A much larger bank is planned.","text":"Current limitation: The question bank is currently a starter/sample dataset. A much larger bank is planned."},{"sec":"Current limitations (be honest)","sub":"","kind":"limitation","title":"The core admin and workflow product is still being built.","text":"Current limitation: The core admin and workflow product is still being built."},{"sec":"Current limitations (be honest)","sub":"","kind":"limitation","title":"Handwriting-to-text evaluation and hardware (such as stylus or smartpen) are not part of the current product. They are future ideas and would be opt-in per scho","text":"Current limitation: Handwriting-to-text evaluation and hardware (such as stylus or smartpen) are not part of the current product. They are future ideas and would be opt-in per school."},{"sec":"Current limitations (be honest)","sub":"","kind":"limitation","title":"The platform is in pilot stage, not a finished public launch.","text":"Current limitation: The platform is in pilot stage, not a finished public launch."},{"sec":"Pilot program","sub":"","kind":"pilot","title":"Pilot program","text":"Pilot: Open to CBSE schools and teachers only.\n• Free, waitlist-based pilot.\n• Phase 1 is active and free. Terms for Phases 2 and 3 are not decided yet.\n• Setup and implementation are free.\n• To join: use the waitlist on the website or email admin.edora@gmail.com."},{"sec":"Pilot program","sub":"","kind":"pilot","title":"Open to CBSE schools and teachers only.","text":"Pilot: Open to CBSE schools and teachers only."},{"sec":"Pilot program","sub":"","kind":"pilot","title":"Free, waitlist-based pilot.","text":"Pilot: Free, waitlist-based pilot."},{"sec":"Pilot program","sub":"","kind":"pilot","title":"Phase 1 is active and free. Terms for Phases 2 and 3 are not decided yet.","text":"Pilot: Phase 1 is active and free. Terms for Phases 2 and 3 are not decided yet."},{"sec":"Pilot program","sub":"","kind":"pilot","title":"Setup and implementation are free.","text":"Pilot: Setup and implementation are free."},{"sec":"Pilot program","sub":"","kind":"pilot","title":"To join: use the waitlist on the website or email admin.edora@gmail.com.","text":"Pilot: To join: use the waitlist on the website or email admin.edora@gmail.com."},{"sec":"Pricing","sub":"","kind":"pricing","title":"Pricing","text":"Pricing: Usage-based: schools pay only for what they use. No baseline fee.\n• Setup and implementation: free. Data migration: free.\n• Exact prices and units are not finalized. \"Pricing is usage-based and will be announced later. Pilot Phase 1 is free.\""},{"sec":"Pricing","sub":"","kind":"pricing","title":"Usage-based: schools pay only for what they use. No baseline fee.","text":"Pricing: Usage-based: schools pay only for what they use. No baseline fee."},{"sec":"Pricing","sub":"","kind":"pricing","title":"Setup and implementation: free. Data migration: free.","text":"Pricing: Setup and implementation: free. Data migration: free."},{"sec":"Pricing","sub":"","kind":"pricing","title":"Exact prices and units are not finalized. \"Pricing is usage-based and will be announced later. Pilot Phase 1 is free.\"","text":"Pricing: Exact prices and units are not finalized. \"Pricing is usage-based and will be announced later. Pilot Phase 1 is free.\""},{"sec":"Why trust Edora","sub":"","kind":"trust","title":"Why trust Edora","text":"Why trust Edora: Free data migration in and out, with data returned securely if a school leaves.\n• No baseline fee, so schools only pay for what they use.\n• Transparent handling of limits: EdInt tells teachers when an exam doesn't fully match the blueprint instead of hiding it.\n• Built with direct input from schools through a pilot program, with experienced advisors in technology and sales/marketing."},{"sec":"Why trust Edora","sub":"","kind":"trust","title":"Free data migration in and out, with data returned securely if a school leaves.","text":"Why trust Edora: Free data migration in and out, with data returned securely if a school leaves."},{"sec":"Why trust Edora","sub":"","kind":"trust","title":"No baseline fee, so schools only pay for what they use.","text":"Why trust Edora: No baseline fee, so schools only pay for what they use."},{"sec":"Why trust Edora","sub":"","kind":"trust","title":"Transparent handling of limits: EdInt tells teachers when an exam doesn't fully match the blueprint instead of hiding it.","text":"Why trust Edora: Transparent handling of limits: EdInt tells teachers when an exam doesn't fully match the blueprint instead of hiding it."},{"sec":"Why trust Edora","sub":"","kind":"trust","title":"Built with direct input from schools through a pilot program, with experienced advisors in technology and sales/marketing.","text":"Why trust Edora: Built with direct input from schools through a pilot program, with experienced advisors in technology and sales/marketing."},{"sec":"Sample FAQ (bot-ready answers)","sub":"","kind":"faq","title":"What is Edora?","text":"Edora builds simple, modular software for schools so teachers spend less time on paperwork and more time teaching. Schools plug in only the tools they need."},{"sec":"Sample FAQ (bot-ready answers)","sub":"","kind":"faq","title":"What is EdInt?","text":"EdInt (Education Intelligence) is Edora's assessment engine. It helps teachers build exams from a clear blueprint, then gives deep insights about each student's performance."},{"sec":"Sample FAQ (bot-ready answers)","sub":"","kind":"faq","title":"How is EdInt different from a normal question paper generator?","text":"It builds every paper from a structured blueprint (marks, difficulty, question types, chapters), checks how closely the paper matches it, and alerts the teacher if it can't fully match. It also generates the answer key and marking scheme."},{"sec":"Sample FAQ (bot-ready answers)","sub":"","kind":"faq","title":"Does EdInt use AI?","text":"EdInt uses a structured, blueprint-driven engine to select and assemble exams. Its current insights are smart and rule-based. More intelligent features are planned in later phases."},{"sec":"Sample FAQ (bot-ready answers)","sub":"","kind":"faq","title":"Can I create multiple versions of the same exam?","text":"Yes. EdInt can generate variants of an exam. We are improving how different the variants are from each other."},{"sec":"Sample FAQ (bot-ready answers)","sub":"","kind":"faq","title":"Can students take exams online on EdInt?","text":"Not yet. Online exam publishing and a student exam portal are planned."},{"sec":"Sample FAQ (bot-ready answers)","sub":"","kind":"faq","title":"Does EdInt grade answers automatically?","text":"Automatic evaluation is planned. It is not available yet."},{"sec":"Sample FAQ (bot-ready answers)","sub":"","kind":"faq","title":"Which boards does EdInt support?","text":"The pilot is for CBSE schools and teachers."},{"sec":"Sample FAQ (bot-ready answers)","sub":"","kind":"faq","title":"How much does it cost?","text":"Pricing is usage-based and not finalized. Pilot Phase 1 is free."},{"sec":"Sample FAQ (bot-ready answers)","sub":"","kind":"faq","title":"How do I join the pilot?","text":"Join the waitlist on our website, or email admin.edora@gmail.com."},{"sec":"Sample FAQ (bot-ready answers)","sub":"","kind":"faq","title":"What happens to my school's data?","text":"Migration into Edora is free. If you leave, your data is returned to you securely."},{"sec":"Sample FAQ (bot-ready answers)","sub":"","kind":"faq","title":"Is the admin/workflow product available?","text":"It is under development. EdInt is our first available product."},{"sec":"Sample FAQ (bot-ready answers)","sub":"","kind":"faq","title":"How do I contact Edora?","text":"admin.edora@gmail.com"},{"sec":"Fallback responses","sub":"","kind":"fallback","title":"Fallback responses","text":"Unknown question: \"I'm not sure about that one. You can reach the team at admin.edora@gmail.com and they'll help.\"\n• Pricing: \"Pricing is usage-based and will be announced later. Pilot Phase 1 is free.\"\n• Non-CBSE board: \"Our pilot is for CBSE schools and teachers right now. Email admin.edora@gmail.com to be considered for the future.\"\n• Planned feature asked as if live: \"That's on our roadmap but not available yet.\""},{"sec":"Fallback responses","sub":"","kind":"fallback","title":"Unknown question: \"I'm not sure about that one. You can reach the team at admin.edora@gmail.com and they'll help.\"","text":"Unknown question: \"I'm not sure about that one. You can reach the team at admin.edora@gmail.com and they'll help.\""},{"sec":"Fallback responses","sub":"","kind":"fallback","title":"Pricing: \"Pricing is usage-based and will be announced later. Pilot Phase 1 is free.\"","text":"Pricing: \"Pricing is usage-based and will be announced later. Pilot Phase 1 is free.\""},{"sec":"Fallback responses","sub":"","kind":"fallback","title":"Non-CBSE board: \"Our pilot is for CBSE schools and teachers right now. Email admin.edora@gmail.com to be considered for the future.\"","text":"Non-CBSE board: \"Our pilot is for CBSE schools and teachers right now. Email admin.edora@gmail.com to be considered for the future.\""},{"sec":"Fallback responses","sub":"","kind":"fallback","title":"Planned feature asked as if live: \"That's on our roadmap but not available yet.\"","text":"Planned feature asked as if live: \"That's on our roadmap but not available yet.\""}];
+  var FAQ=DOC_CHUNKS.filter(function(c){ return c.kind==='faq'; });
+  var SUGGEST=["What is Edora?","How does the Blueprint Engine work?","Who is on the team?","What is planned?","How does data migration work?","How much does it cost?","Contact"];
+
+  var A_UNKNOWN="I'm not sure about that one. You can reach the team at admin.edora@gmail.com and they'll help.";
+  var A_PRICE="Pricing is usage-based and will be announced later. Pilot Phase 1 is free. Schools pay only for what they use, with no baseline fee, and setup, implementation and data migration are free.";
   var A_BOARD="Our pilot is for CBSE schools and teachers right now. Email admin.edora@gmail.com to be considered for the future.";
   var A_AI="EdInt uses a structured, blueprint-driven engine to select and assemble exams. Its current insights are smart and rule-based. More intelligent features are planned in later phases.";
-  var A_ERP="We describe Edora as core admin and workflow management, not an ERP. EdInt, our assessment engine, is the first available product.";
-  var A_PRIVATE="I can't share that publicly. Please email admin.edora@gmail.com and the team will help you directly.";
-  var A_UNKNOWN="I'm not sure about that one. You can reach the team at admin.edora@gmail.com and they'll help.";
-  var A_OFFTOPIC="I can only help with questions about Edora and EdInt. For anything else, email admin.edora@gmail.com.";
-  var A_LIMITS="The question bank is currently a starter/sample dataset, and a much larger bank is planned. The core admin and workflow product is still being built. Handwriting-to-text evaluation and hardware such as a stylus or smartpen are not part of the current product; they are future ideas. The platform is in pilot stage, not a finished public launch.";
-  var A_COVERAGE="EdInt builds the closest possible exam, calculates the actual compliance score, and alerts the teacher. It never silently produces a misleading result.";
+  var A_GRADE="Automatic evaluation is planned. It is not available yet.";
+  var A_ERP="Edora's core admin and workflow management is under development. It is not an ERP. EdInt is our first available product.";
+  var A_CONTACT="The best way to reach the team is by email at admin.edora@gmail.com.";
+  var A_CURRICULUM="The pilot is for CBSE schools and teachers. For class, subject, language or medium-of-instruction details, email admin.edora@gmail.com.";
+  var A_COVER="The question bank is currently a starter/sample dataset, and a much larger bank is planned. EdInt builds the closest possible exam and shows the real blueprint compliance score instead of hiding gaps.";
+  var A_FUNDING="Edora is bootstrapped.";
+  var A_PILOT_OPEN="The pilot is open to CBSE schools and teachers.";
 
-  // PUBLIC-ONLY knowledge base: curated from the internal EdInt doc. Never add private/internal details here.
+  var STOP={};
+  var SW="a an the is are am was were be been being do does did doing have has had having can could would should will shall may might must i you we they he she it my me our us your yours their them this that these those to of for and or on in at with about from by as so if then than also just like take get got please tell give want need there here what who whom whose when where why which how much many more most some any all very really into over under between during before after again once only own same too not no yes but because while use used using number today now see saw seen look looks looking show shows shown know knows think thinks mean means call called calling write wrote written compose".split(" ");
+  for(var _sw=0;_sw<SW.length;_sw++){ STOP[SW[_sw]]=1; }
 
-  var KB=[
-    {q:"What is Edora?",tags:["edora","platform","software","school","schools","overview","about","product","company","module","modules","modular","plugin","plug","os"],
-     a:"Edora builds simple, modular software for schools so teachers spend less time on paperwork and more time teaching. Schools plug in only the tools they need.",
-     links:[SOLUTION,TRUST]},
-    {q:"What is Edora's vision?",tags:["edora","vision","operating","system","os","future","store","office","windows","roadmap"],
-     a:"The long-term vision is to be the operating system for schools. Think Microsoft Office, not Windows: an app store of purpose-built school apps that a school plugs in as needed, not a literal operating system.",
-     links:[ROADMAP]},
-    {q:"What problem does Edora solve?",tags:["problem","solve","mission","pain","workload","admin","paperwork","cost","costs","coaching","extracurricular","profile","abroad","why"],
-     a:"Teachers spend much of their time on administrative and academic paperwork instead of teaching, and schools face high operational costs. Students also lack access to extracurricular opportunities. Edora's mission is to remove teachers' non-academic admin workload and make academic work more efficient.",
-     links:[SOLUTION]},
-    {q:"What modules will Edora have?",tags:["modules","module","admin","workflow","extracurricular","discovery","future","core","roadmap"],
-     a:"Long term, Edora will have three parts: core admin and workflow management (under development), EdInt (our first product, with v1 ready), and a student extracurricular discovery platform (planned for the future).",
-     links:[ROADMAP]},
-    {q:"What is Edora's tagline?",tags:["tagline","slogan","motto"],
-     a:"Building the operating system for schools, together.",links:[]},
-    {q:"What is EdInt?",tags:["edint","education","intelligence","assessment","engine","exam","exams","paper","papers","test","tests","definition","stands","acronym"],
-     a:"EdInt stands for Education Intelligence. It is Edora's assessment engine. It helps teachers create exams quickly and gives deep, per-student insights.\n\nIn one line: EdInt streamlines assessments with deep per-student insights.",
-     links:[HOW]},
-    {q:"How does EdInt work?",tags:["work","works","blueprint","engine","configure","configuration","selection","generate","generation","review","compliance","process","steps","duplicates","difficulty","variants","chatbot"],
-     a:"EdInt is blueprint-driven, not a chatbot writing a paper. You configure the exam (board, class, subject, chapters, marks, duration, difficulty mix, question types and variants). The Blueprint Engine builds a blueprint for you to review, then the Question Selection Engine picks questions from a structured bank while avoiding duplicates. EdInt generates the question paper, answer key and marking scheme, scores blueprint compliance, and gives you an examination review screen before you use it.",
-     links:[HOW]},
-     {q:"How is EdInt different from a normal question paper generator?",tags:["different","normal","generator","compare","comparison","better","alternative","others","tools","blueprint","compliance","answer","key","scheme","traditional"],
-     a:"It builds every paper from a structured blueprint covering marks, difficulty, question types and chapters. It checks how closely the paper matches that blueprint and alerts the teacher if it can't fully match. It also generates the answer key and marking scheme.",
-     links:[HOW]},
-    {q:"What happens if the question bank cannot fully satisfy a blueprint?",tags:["insufficient","limited","coverage","shortage","blueprint","compliance","score","alert","honest","cannot","cant"],
-     a:"EdInt builds the closest possible exam, calculates the actual compliance score, and alerts the teacher. It never silently produces a misleading result.",
-     links:[HOW]},
-    {q:"What is live in EdInt v1?",tags:["live","available","v1","features","feature","dashboard","dark","mode","question","bank","selection","review","variants","ui"],
-     a:A_LIVE,
-     links:[SOLUTION]},
-    {q:"What teacher insights does EdInt offer?",tags:["insights","analytics","chapter","intelligence","trends","patterns","health","student","profiles","class","pdf","export","practice","adaptive","demo","teacher","join","code"],
-     a:"The teacher insights suite includes chapter intelligence, question trends, exam patterns, question bank health, student profiles, class analytics with PDF export, smart rule-based insights, a practice generator and an adaptive demo. Join-code Adaptive Live Practice sessions are also available.",
-     links:[SOLUTION]},
-     {q:"Is EdInt available now?",tags:["edint","ready","available","now","live","v1","status","use","platform","product"],
-     a:"EdInt v1 is ready and is our first available product. The pilot is for CBSE schools and teachers; Phase 1 is free and waitlist-based.",
-     links:[JOIN,CONTACT]},
-    {q:"Can I create multiple versions of an exam?",tags:["variants","variant","versions","version","multiple","papers","sets","sections","diversity","overlap","create","generate"],
-     a:"Yes. The multi-variant exam UI is live, so you can generate variants of an exam. We are improving how different the variants are from each other.",
-     links:[SOLUTION]},
-     {q:"Which boards does EdInt support?",tags:["board","boards","cbse","icse","ib","igcse","state","syllabus","curriculum"],
-     a:"The pilot is for CBSE schools and teachers only. We are not promising availability for other boards yet; email admin.edora@gmail.com to be considered for the future.",
-     links:[CONTACT]},
-    {q:"Which classes and subjects?",tags:["classes","class","subjects","subject","grades","grade","coverage","curriculum","syllabus"],
-     a:"The pilot is for CBSE schools and teachers. For class and subject coverage details, email admin.edora@gmail.com.",
-     links:[CONTACT]},
-    {q:"Who is EdInt for?",tags:["who","uses","use","teachers","schools","students","audience","target","for","edint"],
-     a:"EdInt is built for teachers and schools, CBSE-first. Teachers use it to create exams and see deep, per-student insights.",
-     links:[HOW]},
-     {q:"How do I join the pilot?",tags:["pilot","join","waitlist","early","access","signup","sign","register","apply","enroll","trial","demo","start","eligible","eligibility","started","begin","beginning","beta","test","try"],
-     a:"The pilot is free and waitlist-based for CBSE schools and teachers. Phase 1 is active now. Use the waitlist on the website or email admin.edora@gmail.com.",
-     links:[JOIN,CONTACT]},
-    {q:"What are the current limitations?",tags:["limitations","limitation","limited","starter","sample","question","bank","handwriting","stylus","smartpen","hardware","pilot","stage","finished","drawbacks"],
-     a:A_LIMITS,links:[CONTACT]},
-    {q:"What happens to my school's data?",tags:["data","migration","privacy","secure","security","leave","leaving","return","returned","export","school"],
-     a:"Data migration into Edora is free, and migration out is free too. If a school stops using Edora, its data is returned securely.",
-     links:[TRUST]},
-    {q:"Is Edora secure?",tags:["secure","security","safe","data","privacy"],
-     a:"If a school stops using Edora, its data is returned securely. For specific security questions, email admin.edora@gmail.com.",
-     links:[CONTACT]},
-    {q:"Why trust Edora?",tags:["trust","why","choose","benefit","benefits","transparent","limits","pilot","input","advisors","experienced"],
-     a:"Edora offers free data migration in and out, with data returned securely if a school leaves. There is no baseline fee, so schools only pay for what they use. EdInt is transparent when an exam doesn't fully match the blueprint, and the product is built with direct input from schools through a pilot program, with experienced advisors in technology and sales/marketing.",
-     links:[TRUST]},
-    {q:"Is Edora an ERP?",tags:["erp","admin","workflow","management","product","available"],
-     a:A_ERP,links:[CONTACT]},
-    {q:"Does EdInt use AI?",tags:["ai","artificial","intelligence","machine","learning","ml","llm","gpt","smart","intelligent","automated"],
-     a:A_AI,links:[ROADMAP]},
-    {q:"What is on the EdInt roadmap?",tags:["planned","roadmap","coming","future","soon","next","pdf","export","variants","publish","online","evaluation","analytics","proctoring","mcq","worksheet","bank"],
-     a:"Planned work includes PDF export of variants, online exam publishing, a student exam portal, automated evaluation for objective and descriptive answers, dual evaluation shown to students, assessment analytics, a personal per-teacher question bank, live real-time proctoring, an MCQ worksheet generator where wrong options reflect common student mistakes, and a much larger curriculum-based question bank.",
-     links:[ROADMAP]},
-    {q:"What is the intelligence roadmap?",tags:["intelligence","roadmap","recommendations","personalized","adaptive","readiness","prediction","performance","mistakes"],
-     a:"The intelligence roadmap has three phases. Phase 1 covers chapter, question-bank and exam-pattern intelligence. Phase 2 covers student performance and mistake-pattern intelligence. Phase 3 covers recommendations, personalized practice, adaptive assessment and exam-readiness prediction.",
-     links:[ROADMAP]},
-    {q:"What are the pilot phases?",tags:["phase","phases","phase1","phase2","phase3","pilot"],
-     a:"Pilot Phase 1 is active and free. Terms for Phases 2 and 3 are not decided yet; email admin.edora@gmail.com for updates.",
-     links:[JOIN,CONTACT]},
-    {q:"Is Edora launched?",tags:["launch","launched","release","released","available","live","status","when","finished","edora"],
-     a:"Edora is in pilot stage, not a finished public launch. Phase 1 is active for CBSE schools and teachers; terms for later phases are not decided yet.",
-     links:[JOIN,CONTACT]},
-    {q:"What is the admin and workflow product status?",tags:["admin","workflow","product","status","core","development","available"],
-     a:"The core admin and workflow product is still under development. EdInt is our first available product.",
-     links:[CONTACT]},
-    {q:"Who is behind Edora?",tags:["behind","built","educators","engineers","advisors","team","company"],
-     a:"Edora is built by educators and engineers, with experienced advisors in technology and sales/marketing. For individual details, email admin.edora@gmail.com.",
-     links:[CONTACT]},
-     {q:"How can I contact Edora?",tags:["contact","email","reach","help","talk","speak","message"],
-     a:"You can reach the team any time at admin.edora@gmail.com.",
-     links:[CONTACT]}
-  ];
-
-  var FAQ=[
-    {q:"What is Edora?",a:"Edora builds simple, modular software for schools so teachers spend less time on paperwork and more time teaching. Schools plug in only the tools they need.",links:[SOLUTION]},
-    {q:"What is EdInt?",a:"EdInt (Education Intelligence) is Edora's assessment engine. It helps teachers build exams from a clear blueprint, then gives deep insights about each student's performance.",links:[HOW]},
-    {q:"How is EdInt different from a normal question paper generator?",a:"It builds every paper from a structured blueprint (marks, difficulty, question types, chapters), checks how closely the paper matches it, and alerts the teacher if it can't fully match. It also generates the answer key and marking scheme.",links:[HOW]},
-    {q:"Does EdInt use AI?",a:"EdInt uses a structured, blueprint-driven engine to select and assemble exams. Its current insights are smart and rule-based. More intelligent features are planned in later phases.",links:[ROADMAP]},
-    {q:"Can I create multiple versions of the same exam?",a:"Yes. EdInt can generate variants of an exam. We are improving how different the variants are from each other.",links:[SOLUTION]},
-    {q:"Can students take exams online on EdInt?",a:"Not yet. Online exam publishing and a student exam portal are planned.",links:[CONTACT]},
-    {q:"Does EdInt grade answers automatically?",a:"Automatic evaluation is planned. It is not available yet.",links:[CONTACT]},
-    {q:"Which boards does EdInt support?",a:"The pilot is for CBSE schools and teachers.",links:[CONTACT]},
-    {q:"How much does it cost?",a:"Pricing is usage-based and not finalized. Pilot Phase 1 is free.",links:[PRICING]},
-    {q:"How do I join the pilot?",a:"Join the waitlist on our website, or email admin.edora@gmail.com.",links:[JOIN,CONTACT]},
-    {q:"What happens to my school's data?",a:"Migration into Edora is free. If you leave, your data is returned to you securely.",links:[TRUST]},
-    {q:"Is the admin/workflow product available?",a:"It is under development. EdInt is our first available product.",links:[CONTACT]},
-    {q:"How do I contact Edora?",a:"admin.edora@gmail.com",links:[CONTACT]}
-  ];
-  var SUGGEST=["What is Edora?","What is EdInt?","How is EdInt different?","Does EdInt use AI?","Can students take exams online?","Is it free?","Contact"];
-
-  var STOP={a:1,an:1,the:1,is:1,are:1,am:1,do:1,does:1,did:1,how:1,what:1,who:1,whom:1,whose:1,when:1,where:1,why:1,which:1,can:1,could:1,would:1,should:1,i:1,you:1,we:1,they:1,he:1,she:1,it:1,my:1,me:1,our:1,us:1,your:1,to:1,of:1,for:1,and:1,or:1,on:1,in:1,at:1,with:1,about:1,much:1,many:1,this:1,that:1,these:1,those:1,be:1,been:1,being:1,get:1,got:1,have:1,has:1,had:1,will:1,please:1,tell:1,give:1,want:1,need:1,there:1,their:1,them:1,from:1,by:1,as:1,so:1,if:1,then:1,than:1,also:1,just:1,like:1,take:1};
-  function tokenize(s){ return String(s||'').toLowerCase().replace(/[^a-z0-9\s]/g,' ').split(/\s+/).filter(Boolean); }
-  function keywords(s){ return tokenize(s).filter(function(w){ return w.length>1 && !STOP[w]; }); }
+  function stem(w){
+    if(w.length>4 && /(sses|xes|zes|ches|shes)$/.test(w)) return w.slice(0,-2);
+    if(w.length>4 && /ies$/.test(w)) return w.slice(0,-3)+'y';
+    if(w.length>3 && /s$/.test(w) && !/ss$/.test(w)) return w.slice(0,-1);
+    return w;
+  }
+  function tokenize(s){
+    var raw=String(s||'').toLowerCase().replace(/[^a-z0-9\s]/g,' ').split(/\s+/);
+    var out=[];
+    for(var i=0;i<raw.length;i++){
+      var w=raw[i];
+      if(!w || (w.length<2 && !/[0-9]/.test(w)) || STOP[w]) continue;
+      out.push(stem(w));
+    }
+    return out;
+  }
+  function normq(s){ return tokenize(s).join(' '); }
   function lev(a,b){
     var la=a.length,lb=b.length,i,j,prev=[],cur=[];
     if(a===b) return 0;
@@ -2141,117 +2058,326 @@ form.addEventListener('submit',function(ev){
     return prev[lb];
   }
   function sim(a,b){ a=a||''; b=b||''; var m=Math.max(a.length,b.length); return m?(1-lev(a,b)/m):0; }
-  for(var e0=0;e0<KB.length;e0++){ KB[e0]._hay=(KB[e0].tags.join(' ')+' '+KB[e0].q+' '+KB[e0].a).toLowerCase(); }
-  function score(q,e){
-    var kws=keywords(q),s=0,i,j;
-    for(i=0;i<kws.length;i++){
-      var w=kws[i];
-      if(e.tags.indexOf(w)>=0){ s+=3; continue; }
-      if(e._hay.indexOf(w)>=0){ s+=1.4; continue; }
-      for(j=0;j<e.tags.length;j++){ if(sim(w,e.tags[j])>=0.8){ s+=1.5; break; } }
+
+  var PRICE_RE=/\b(price|prices|pricing|cost|costs|fee|fees|charge|charges|pay|payment|paid|subscription|budget|expensive|cheap|discount|quote|free|trial|tier|tiers)\b/;
+  var BOARD_RE=/\b(icse|isc|igcse|ib|state board|stateboard|other board|other boards|which board|which boards|what board|what boards|supported board|supported boards)\b/;
+  var AI_RE=/\b(ai|artificial intelligence|machine learning|ml|llm|gpt|genai|generative ai)\b/;
+  var GRADE_RE=/\b(auto(matic(ally)?)?[ -]?(grade|grading)|grade automatically|graded automatically|automatic evaluation|automated evaluation|automatic grading|automated grading)\b/;
+  var ERP_RE=/\berp\b/;
+  var CONTACT_RE=/\b(contact|phone|telephone|whatsapp|mobile number|contact number|phone number|email|e-mail|call (you|us)|reach (you|us)|get in touch|schedule a call|book a call)\b/;
+  var IDENTITY_RE=/\b(who are you|what are you(?!\s+(working|building|improving|planning|making|doing))|your name|are you a bot|are you human|are you real)\b/;
+  var HELP_RE=/\b(what can you do|how can you help|help me|what do you know|what can i ask)\b|^help$/;
+  var LIVE_RE=/\b(what('s| is) live|which features|what features|features? (are )?(live|available)|what is available( now| today)?|what can (it|i) do)\b/;
+  var TEAM_RE=/\b(team|founder|founders|founded|co[- ]?founder|advisor|advisors|behind|leadership|owner|who (made|built|started|runs|created))\b/;
+  var FUNDING_RE=/\b(funding|funded|investor|investors|investment|venture|vc|raise|raised|crowdfund\w*)\b/;
+  var CURRICULUM_RE=/\b(which|what) (classes?|subjects?|grades?|curriculum|syllabus|medium|language)\b|\b(classes?|subjects?|grades?|curriculum|syllabus)\b (are|is)? ?(supported|covered|available)\b|\b(medium of instruction|language support|english|hindi|tamil|telugu|kannada|malayalam|marathi|bengali|gujarati|urdu)\b|\b(class(es)?|grade|standard)\s*\d+\b|\b\d+(st|nd|rd|th)?\s*(grade|class|standard)\b/;
+  var COVER_RE=/\b(cover|coverage|all chapters|every chapter|all topics|entire syllabus|whole syllabus|question bank size|how many questions)\b/;
+  var COUNT_RE=/\bhow many (schools|students|teachers|users|employees|people|customers|clients)\b/;
+  var WHEN_RE=/\b(when was|when did|founded in|established in|what year|launch date|release date|timeline|deadline|roadmap date)\b/;
+  var PLANNED_RE=/\b(what('s| is| are)? (planned|coming|upcoming|next)|what('s| is) on the (roadmap|horizon)|future plans?|planned features?|features? (are )?planned)\b/;
+  var PROGRESS_RE=/\b(in progress|being (improved|built|worked on)|improving now|what('s| is) in progress|what features are in progress|what are you (working on|improving|building))\b/;
+  var PILOT_RE=/\b(pilot( program| programme)?|what is the pilot|how does the pilot work|pilot phase)\b/;
+  var INTEGRATION_RE=/\b(integrat\w*|api|lms|google classroom|microsoft teams|moodle|canvas|schoology|zapier|webhook)\b/;
+  var APP_RE=/\b(mobile app|android app|ios app|iphone app|app store|google play|play store|download (the )?app)\b/;
+  var MEANING_RE=/\b(why (is|was) (it|edint) called|what does edint (mean|stand for)|meaning of edint|what is edint short for)\b/;
+  var DIFFERENCE_RE=/\b(difference|different|compare|comparison|vs\.?|versus)\b/;
+  var BAD_PHASE_RE=/\bphase\s*(0|[4-9]|\d{2,})\b/;
+  var QUESTIONBANK_RE=/\bwhat is the question bank\b|\bhow does the question bank work\b|\btell me about the question bank\b/;
+  var VARIANTS_RE=/\b(variants?|versions?)\b.*\b(differ\w*|divers\w*|similar\w*|overlap|same)\b|\bhow (many|different)\b.*\b(variants?|versions?)\b|\bwhat ('s|is) a? ?variant\b|\bwhat are variants\b|\bdefine variant\b|\bpaper (a|b|c)\b/;
+  var ANALYTICS_RE=/\b(chapter intelligence|question trends?|exam patterns?|question bank health|student profiles?|class analytics|practice generator|adaptive demo|smart insights?|rule[- ]based insights?|analytics pages?)\b/;
+  var STATUS_RE=/\bwhat (is|isn't|is not) (not )?(ready|available)\b|\bproduct status\b|\bstatus of (the )?(product|platform|edint|edora)\b/;
+  var FUTURE_RE=/\bwhat is the future\b|\bfuture of (edora|edint)\b|\bwhat does the future hold\b/;
+  var SEGMENT_RE=/\b(private|government|public|govt) schools?\b|\bonly for cbse\b|\bis (this|it) (only )?(for )?cbse\b|\bfor cbse only\b/;
+  var SEGMENT_NO_RE=/\b(colleges?|universities?|higher education|coaching|tuition|tutoring|homeschool\w*)\b/;
+  var EXTRACURRICULAR_RE=/\bextracurricular\b/;
+  var ADMIN_RE=/\b(admin|workflow)\b.{0,20}\b(product|system|software|platform|tool|module|part)\b|\bwhat is the admin product\b/;
+  var LOCATION_RE=/\b(where (are|is) (you|edora|your (team|office|headquarters|hq))|where (are|is) (you )?(based|located)|location|headquarters|hq|office|address|based in|which city|which country)\b/;
+  var WEBSITE_RE=/\b(what('s| is) your (website|url|web address|domain)|website link|linkedin|twitter|instagram|facebook)\b/;
+  var COMPANY_RE=/\b(real|registered|legit|legitimate|legal)\b.{0,12}\bcompany\b|\bcompany (registration|registered|incorporated)\b|\b(incorporated|pvt ltd|private limited)\b/;
+  var ONBOARD_RE=/\b(onboard\w*|how long does (setup|implementation|onboarding) take|implementation time|setup time)\b/;
+  var DEMO_RE=/\b(book|schedule|request|see|have|get) (a )?demo\b|\bdemo (request|call|session)\b/;
+  var PRIVACY_RE=/\b(sell|share|trade|give away) (my|our) (data|information)\b/;
+  var PARENTS_RE=/\b(parents?|guardians?)\b.*\b(results?|marks|report card)\b|\b(results?|marks)\b.*\b(parents?|guardians?)\b/;
+  var MATH_RE=/\b\d+\s*(\+|-|\*|\/|x|times|plus|minus)\s*\d+\b/;
+  var OFFTOPIC_RE=/\b(write|compose|generate) (me )?(an? )?(essay|story|poem|letter|email|code|program|recipe)\b|\b(homework|math problem|translate)\b/;
+  var SUPPORT_RE=/\b(customer service|technical support|help ?desk|support hours|do you provide support|is there support)\b/;
+  var SIGNUP_RE=/\b(sign ?up|register|apply|application process|enrol\w*|enroll\w*|join (the )?pilot|(try|test|evaluate) (it|the product|edint)|can i try)\b/;
+  var DURATION_RE=/\bhow long (is|does|will|do|would)\b/;
+  var CERT_RE=/\b(gdpr|ferpa|soc ?2|soc2|iso ?27001|hipaa|compliance certification|certified compliant)\b/;
+  var POLICY_RE=/\b(privacy policy|terms of service|terms and conditions|refund policy|cookie policy|data policy)\b/;
+  var DATA_STORE_RE=/\b(where (is|are) (my|our|the) data (stored|kept|hosted)|data (storage|hosting)|servers?|data cent\w*)\b/;
+  var AVAIL_RE=/\b(available|availability|live|now|yet|ready|status|launch|launched|released|when|can i use|do you have|is there)\b/;
+  var DOMAIN_RE=/\b(edora|edint|education intelligence|assessment|exam|exams|paper|papers|question|questions|blueprint|question bank|teacher|teachers|school|schools|student|students|class|classes|subject|subjects|chapter|chapters|cbse|board|boards|pilot|waitlist|pricing|cost|free|pay|feature|features|roadmap|planned|live|variant|variants|insight|insights|analytics|admin|workflow|module|modules|product|platform|data|migration|privacy|secure|team|founder|advisor|contact|email|support|practice|proctor|proctoring|pdf|curriculum|syllabus|difficulty|erp|ai|onboarding|setup|implementation|handwriting|stylus|smartpen|hermes|bootstrapped|billing|usage)\b/;
+  var ENTITY_RE=/\b(edora|edint|cbse|erp|ai)\b/;
+
+  var N=DOC_CHUNKS.length;
+  var DF={};
+  for(var _i=0;_i<N;_i++){
+    var _c=DOC_CHUNKS[_i];
+    _c._tok=tokenize(_c.text);
+    _c._titleTok=tokenize(_c.sec+' '+_c.sub+' '+_c.title);
+    _c._norm=' '+_c._tok.join(' ')+' ';
+    var _seen={}, _all=_c._tok.concat(_c._titleTok);
+    for(var _j=0;_j<_all.length;_j++){
+      var _t=_all[_j];
+      if(!_seen[_t]){ _seen[_t]=1; DF[_t]=(DF[_t]||0)+1; }
     }
-    s+=sim(kws.join(' '),(e.q+' '+e.tags.join(' ')).toLowerCase())*2.5;
+    _c._seen=_seen;
+  }
+  var IDF={};
+  for(var _tk in DF){ if(DF.hasOwnProperty(_tk)) IDF[_tk]=Math.log(1+N/DF[_tk]); }
+  var VOCAB=Object.keys(IDF);
+
+  function tokMatch(a,b){
+    if(a===b) return 1;
+    if(a.length>=4 && b.length>=4 && Math.abs(a.length-b.length)<=2 && (b.indexOf(a)===0 || a.indexOf(b)===0)) return 0.85;
+    return 0;
+  }
+  function bestIdf(qt){
+    var best=IDF[qt]||0;
+    if(best) return best;
+    for(var i=0;i<VOCAB.length;i++){
+      var ct=VOCAB[i];
+      if(tokMatch(qt,ct) && IDF[ct]>best) best=IDF[ct];
+    }
+    return best;
+  }
+  function scoreChunk(c,qTokens,low){
+    var s=0, seen={};
+    for(var i=0;i<qTokens.length;i++){
+      var qt=qTokens[i];
+      if(seen[qt]) continue;
+      seen[qt]=1;
+      var hit=0, j, ct, m, idf;
+      for(j=0;j<c._titleTok.length;j++){
+        ct=c._titleTok[j]; m=tokMatch(qt,ct);
+        if(m){ idf=IDF[ct]||0.3; if(m*idf>hit) hit=m*idf; }
+      }
+      if(hit){ s+=6*hit; continue; }
+      for(j=0;j<c._tok.length;j++){
+        ct=c._tok[j]; m=tokMatch(qt,ct);
+        if(m){ idf=IDF[ct]||0.3; if(m*idf>hit) hit=m*idf; }
+      }
+      if(hit) s+=2*hit;
+    }
+    if(qTokens.length>1 && c._norm.indexOf(' '+qTokens.join(' ')+' ')>=0) s+=8;
+    if(s>0 && c.kind==='process' && /\b(what('s| is)|how (does|do)|explain)\b/.test(low)) s+=10;
+    if(TEAM_RE.test(low) && /about edora/i.test(c.sec)) s+=6;
+    if(/pricing|price|cost|fee|pay/.test(low) && /pricing/i.test(c.sec)) s+=4;
+    if(/pilot|join|waitlist|trial|apply/.test(low) && /pilot/i.test(c.sec)) s+=4;
+    if(/roadmap|planned|future|coming|progress/.test(low) && (c.kind==='planned'||c.kind==='progress'||c.kind==='roadmap')) s+=4;
+    if(/data|migration|privacy|secure/.test(low) && /data|migration/i.test(c.text)) s+=3;
+    if(AVAIL_RE.test(low) && (c.kind==='planned'||c.kind==='progress')) s+=2;
     return s;
   }
-  function best(q){
-    var top=null,topS=0;
-    for(var i=0;i<KB.length;i++){ var sc=score(q,KB[i]); if(sc>topS){ topS=sc; top=KB[i]; } }
-    return topS>=3?top:null;
+  function linksFor(c){
+    var t=(c.title||'').toLowerCase(), k=c.kind;
+    if(k==='pricing') return [PRICING,CONTACT];
+    if(k==='pilot') return [JOIN,CONTACT];
+    if(k==='live'||k==='progress'||k==='planned'||k==='roadmap'||k==='insights') return [ROADMAP,SOLUTION];
+    if(k==='limitation') return [CONTACT];
+    if(k==='trust') return [TRUST];
+    if(k==='process') return [HOW];
+    if(k==='about'||k==='modules') return [SOLUTION,TRUST];
+    if(k==='faq'){
+      if(/cost|price/.test(t)) return [PRICING,CONTACT];
+      if(/join|pilot/.test(t)) return [JOIN,CONTACT];
+      if(/contact/.test(t)) return [CONTACT];
+      if(/data/.test(t)) return [TRUST];
+      if(/board|class|subject|curriculum/.test(t)) return [CONTACT];
+      if(/different|generator/.test(t)) return [HOW];
+      if(/ai/.test(t)) return [ROADMAP];
+      if(/edora|edint/.test(t)) return [SOLUTION];
+      return [CONTACT];
+    }
+    if(k==='rules'||k==='fallback') return [CONTACT];
+    return [CONTACT];
   }
-
-  function normq(s){ return String(s||'').toLowerCase().replace(/[^a-z0-9\s]/g,' ').replace(/\s+/g,' ').trim(); }
   function faqBest(q){
     var nq=normq(q), bs=0, hit=null;
     if(!nq) return null;
     for(var i=0;i<FAQ.length;i++){
-      var sc=sim(nq,normq(FAQ[i].q));
+      var sc=sim(nq,normq(FAQ[i].title));
       if(sc>bs){ bs=sc; hit=FAQ[i]; }
     }
-    return bs>=0.84?hit:null;
+    return bs>=0.86?hit:null;
   }
-
-  var PRICE_RE=/\b(price|prices|pricing|cost|costs|fee|fees|charge|charges|pay|payment|paid|subscription|budget|expensive|cheap|discount|quote|free|trial|tier|tiers)\b/;
-  var BOARD_RE=/\b(icse|isc|igcse|ib|state board|stateboard|other board|other boards|which board|which boards|what board|what boards|supported board|supported boards)\b/;
-  var AI_RE=/\b(ai|artificial intelligence|machine learning|ml|llm|gpt|genai|generative ai|intelligent)\b/;
-  var ERP_RE=/\berp\b/;
-  var PRIVATE_RE=/\b(founder|founders|co[- ]?founder|ceo|cto|coo|cfo|advisor|advisors|employee|employees|headcount|salary|salaries|funding|funded|invest|investor|investors|investment|revenue|profit|valuation|cap table|bootstrap\w*|self[- ]funded|profitab\w*|contract|contracts|legal|sla|terms|refund|refunds|cancel|cancellation|uptime|security audit|certification|certifications|iso|soc ?2|source code|database|schema|api|sso|lms|sis|integrat\w*|google classroom|moodle|school names?|pilot schools?|which schools|student data|share\b.*\bdata\b|data sharing|privacy polic\w*|sell|selling|competitor|competitors|partnership|partnerships|white ?label|resell|reseller|roadmap date|deadline|launch date|timeline|hiring|careers|internship|located|location|physical office|office location|your office|company office|headquarters|hq|storage|stored|hosted|hosting|server|servers|gdpr|ferpa|coppa)\b/;
-  var LIMITS_RE=/\b(can ?not|can't|cannot|limitation|limitations|doesn't|does not|not support|missing|weakness|weaknesses|drawback|drawbacks)\b/;
-  var DOMAIN_RE=/\b(edora|edint|education|intelligence|exam|exams|assessment|paper|papers|question|questions|blueprint|bank|mark|marks|grading|grade|teacher|teachers|school|schools|student|students|class|classes|subject|subjects|chapter|chapters|cbse|board|boards|pilot|waitlist|price|pricing|cost|fee|fees|free|pay|plan|plans|feature|features|data|privacy|variant|variants|insight|insights|analytics|admin|workflow|module|modules|product|platform|launch|trial|demo|contact|email|support|practice|proctor|pdf|curriculum|syllabus|difficulty|erp|ai|app|application|chatbot|phone|mobile|tablet|cloud|offline|browser|internet|device|windows|mac|linux|onboarding|setup|implementation|password|login|log in|sign in|account|reset|bug|glitch|error|not working|broken|testimonial|testimonials|review|reviews|success stor\w*|reference|references|success rate|outcomes|impact)\b/;
-  var SURVEY_RE=/\b(survey|surveys|feedback|questionnaire|interview|research|case study)\b/;
-  var CONTACT_RE=/\b(phone|telephone|call|whatsapp|mobile number|contact number|phone number)\b/;
-  var LANG_RE=/\b(language|languages|medium of instruction|english medium|tamil medium|hindi medium|tamil|hindi|telugu|kannada|malayalam|marathi|bengali|gujarati|urdu)\b/;
-  var LIVE_RE=/\b(what('s| is) live|which features|what features|features? (are )?(live|available)|what is available( now| today)?|what can (it|i) do)\b/;
-  var MISMATCH_RE=/\b(mismatch|doesn'?t match|does not match|can'?t match|cannot match|not fully match|blueprint compliance|compliance score)\b/;
-  var SCALE_RE=/\b(how many (schools|students|teachers|users|exams)|scale|scalab\w*|concurrent|capacity|handle \d+|thousand|million|1000|10000)\b/;
-  var COVER_RE=/\b(cover|coverage|all chapters|every chapter|all topics|entire syllabus|whole syllabus)\b/;
-
-  var A_MOBILE="We haven't shared details about a mobile app. Email admin.edora@gmail.com and the team can help.";
-  var A_ONLINE="Not yet. Online exam publishing and a student exam-taking portal are planned.";
-  var A_GRADE="Not yet. Automated evaluation for objective and descriptive answers is planned.";
-  var A_PDF="PDF download for generated exams is being improved. PDF export of variants is planned and not available yet.";
-  var A_PROCTOR="Live real-time proctoring is planned and not available yet.";
-  var A_PBANK="A personal per-teacher question bank is planned and not available yet.";
-  var A_MCQ="An MCQ worksheet generator where each wrong option reflects a common student mistake is planned and not available yet.";
-  var A_BANK="The current question bank is a starter/sample dataset. A much larger curriculum-based question bank is planned.";
-  var A_DUAL="Dual evaluation, showing teacher grading and machine correction side by side, is planned and not available yet.";
-  var A_RESULTS="Publishing results to students is being improved. Email admin.edora@gmail.com for details.";
-  var A_SURVEY="Thanks for your interest. For surveys, feedback or research requests, email admin.edora@gmail.com and the team will reply directly.";
-  var A_LANG="The pilot is for CBSE schools and teachers. For language or medium-of-instruction details, email admin.edora@gmail.com.";
-  var A_CONTACT="The best way to reach the team is by email at admin.edora@gmail.com.";
-  var A_COVER="The current question bank is a starter/sample dataset, and a much larger curriculum-based bank is planned. EdInt always shows the real blueprint compliance score instead of hiding gaps.";
-  var A_LIVE="Live in EdInt v1: dashboard and dark mode, exam configuration, blueprint generation and review, a structured question bank with filtering, the Question Selection Engine, question paper/answer key/marking scheme generation, the examination review screen, blueprint compliance analysis, graceful handling of limited question coverage, and the multi-variant exam UI.";
-  var A_SCALE="We haven't shared capacity or scaling details publicly. Email admin.edora@gmail.com and the team can help.";
-  var PLANNED=[
-    {re:/\b(mobile app|mobile application|app for (android|ios)|android app|ios app|iphone app|ipad app|tablet app|is there an app|do you have an app|download the app|edora app|edint app)\b/, a:A_MOBILE},
-    {re:/\b(online exam|exam online|exam portal|take exams? online|give exams? online|publish(ing)? exams?|student (exam )?portal|student log ?in|students? .*\b(take|give|write|attend|appear)\b.*\b(exam|exams|test|tests)\b)/, a:A_ONLINE},
-    {re:/\b(auto(matic(ally)?)?[ -]?(grade|grading|evaluat(e|ion))|grade automatically|graded automatically|automatic evaluation|(automatic|automatically|auto)[ -]?(correct|correction|check|checking))\b/, a:A_GRADE},
-    {re:/\bpdf\b|\bdownload\b.*\b(exam|paper|variant)/, a:A_PDF},
-    {re:/\bproctor\w*\b/, a:A_PROCTOR},
-    {re:/\b(personal|own|per[- ]teacher) question bank\b|\b(upload|add) (my |own |my own )?questions\b/, a:A_PBANK},
-    {re:/\b(mcq|worksheet|distractor|wrong option)\b/, a:A_MCQ},
-    {re:/\b(how many questions|number of questions|question bank size|size of the (question )?bank|question bank.*\b(large|larger|big|bigger|enough)\b|\b(large|larger|big|bigger|enough)\b.*question bank)\b/, a:A_BANK},
-    {re:/\b(dual evaluation|machine correction)\b/, a:A_DUAL},
-    {re:/\bassessment analytics\b/, a:"Assessment analytics is planned and not available yet."},
-    {re:/\b(students?|parents?|children) .*\b(results?|marks?|scores?|report cards?)\b|\b(publish|publishing|show|share) .*\b(results?|marks?|scores?)\b/, a:A_RESULTS}
-  ];
-
+  function findChunk(kind,start){
+    for(var i=0;i<DOC_CHUNKS.length;i++){
+      var c=DOC_CHUNKS[i];
+      if(c.kind===kind && c.title.indexOf(start)===0) return c;
+    }
+    return null;
+  }
+  function expand(tokens,low){
+    if(TEAM_RE.test(low) && tokens.indexOf('team')<0) tokens.push('team');
+    return tokens;
+  }
   function reply(q){
-    var low=String(q||'').toLowerCase().trim();
-    if(!low) return {text:"Ask me anything about Edora, EdInt, the pilot or pricing.",links:[]};
-    if(/^(hi|hello|hey|yo|hiya|hola|namaste)\b/.test(low) || /good (morning|afternoon|evening)/.test(low))
-      return {text:"Hi! I'm the Edora assistant. Ask me about Edora, EdInt, the pilot, pricing or our roadmap.",links:[]};
+    var raw=String(q||'').trim();
+    var low=raw.toLowerCase();
+    if(!low) return {text:"Ask me anything about Edora, EdInt, the pilot, pricing or the roadmap.",links:[]};
+    if(/^(hi|hello|hey|yo|hiya|hola|namaste)\b/.test(low) || /good (morning|afternoon|evening)/.test(low) || /how are you/.test(low))
+      return {text:"Hi! I'm the Edora assistant. Ask me about Edora, EdInt, the blueprint engine, features, the pilot, pricing or the roadmap.",links:[]};
     if(/^(thanks|thank you|thx|ty)\b/.test(low))
       return {text:"You're welcome! Anything else I can help with?",links:[]};
+    if(IDENTITY_RE.test(low))
+      return {text:"I'm the Edora assistant. I answer questions about Edora and EdInt using the product knowledge base.",links:[]};
+    if(HELP_RE.test(low))
+      return {text:"Ask me about Edora, EdInt, the blueprint engine, live features, the pilot, pricing or the roadmap.",links:[]};
 
-    var faq=faqBest(q);
-    if(faq) return {text:faq.a,links:faq.links||[]};
+    var faq=faqBest(raw);
+    if(faq) return {text:faq.text,links:linksFor(faq)};
 
-    if(SURVEY_RE.test(low)) return {text:A_SURVEY,links:[CONTACT]};
-    if(CONTACT_RE.test(low)) return {text:A_CONTACT,links:[CONTACT]};
-    if(LANG_RE.test(low)) return {text:A_LANG,links:[CONTACT]};
-    if(LIVE_RE.test(low)) return {text:A_LIVE,links:[SOLUTION]};
-
-    if(PRICE_RE.test(low) || /\bhow much\b/.test(low)) return {text:A_PRICE,links:[PRICING,CONTACT]};
-    if(BOARD_RE.test(low)) return {text:A_BOARD,links:[CONTACT]};
-    if(AI_RE.test(low) && /\b(grade|grading|evaluat\w*|correct\w*)\b/.test(low)) return {text:A_GRADE,links:[CONTACT]};
-    if(AI_RE.test(low)) return {text:A_AI,links:[ROADMAP]};
-    if(PRIVATE_RE.test(low)) return {text:A_PRIVATE,links:[CONTACT]};
-    if(ERP_RE.test(low)) return {text:A_ERP,links:[CONTACT]};
-
-    for(var i=0;i<PLANNED.length;i++){
-      if(PLANNED[i].re.test(low)) return {text:PLANNED[i].a,links:[CONTACT]};
+    if(/\b(tell me about|about|overview of) edora\b|\bedora (about|overview)\b/.test(low) || /^edora[?.!]*$/.test(low)){
+      var ac=findChunk('about','About Edora');
+      if(ac) return {text:ac.text,links:linksFor(ac)};
     }
-    if(MISMATCH_RE.test(low)) return {text:A_COVERAGE,links:[HOW]};
+    if(/\b(tell me about|about|overview of) edint\b|\bedint (about|overview)\b/.test(low) || /^edint[?.!]*$/.test(low)){
+      var ec=findChunk('edint','What is EdInt');
+      if(ec) return {text:ec.text,links:linksFor(ec)};
+    }
+    if(STATUS_RE.test(low)){
+      if(/\bnot\b/.test(low)){
+        var sn=findChunk('planned','Planned (not available yet)');
+        if(sn) return {text:sn.text,links:linksFor(sn)};
+      } else {
+        var sy=findChunk('live','Live in EdInt v1');
+        if(sy) return {text:sy.text,links:linksFor(sy)};
+      }
+    }
+    if(ANALYTICS_RE.test(low)){
+      var an=findChunk('insights','Nine analytics pages');
+      if(an) return {text:an.text,links:linksFor(an)};
+    }
+    if(FUTURE_RE.test(low)){
+      var fu=findChunk('roadmap','Intelligence roadmap');
+      if(fu) return {text:fu.text,links:linksFor(fu)};
+    }
+    if(MEANING_RE.test(low)){
+      var em=findChunk('edint','EdInt = Education Intelligence');
+      if(em) return {text:em.text,links:[SOLUTION]};
+    }
+    if(DIFFERENCE_RE.test(low) && /\bedora\b/.test(low) && /\bedint\b/.test(low)){
+      var e1=findChunk('about','Edora builds'), e2=findChunk('edint','EdInt is Edora');
+      if(e1 && e2) return {text:e1.text+' '+e2.text,links:[SOLUTION]};
+    }
+    if(PROGRESS_RE.test(low)){
+      var pg=findChunk('progress','In progress');
+      if(pg) return {text:pg.text,links:linksFor(pg)};
+    }
+    if(PLANNED_RE.test(low)){
+      var pl=findChunk('planned','Planned (not available yet)');
+      if(pl) return {text:pl.text,links:linksFor(pl)};
+    }
+    if(SIGNUP_RE.test(low)){
+      var sj=findChunk('pilot','To join');
+      if(sj) return {text:sj.text,links:[JOIN,CONTACT]};
+    }
+    if(DURATION_RE.test(low)) return {text:A_UNKNOWN,links:[CONTACT]};
+    if(PRICE_RE.test(low) || /\bhow much\b/.test(low)) return {text:A_PRICE,links:[PRICING,CONTACT]};
+    if(PILOT_RE.test(low)){
+      var pi=findChunk('pilot','Pilot program');
+      if(pi) return {text:pi.text,links:linksFor(pi)};
+    }
+    if(LIVE_RE.test(low)){
+      var lc=findChunk('live','Live in EdInt v1');
+      if(lc) return {text:lc.text,links:linksFor(lc)};
+    }
+    if(CURRICULUM_RE.test(low)) return {text:A_CURRICULUM,links:[CONTACT]};
     if(COVER_RE.test(low)) return {text:A_COVER,links:[CONTACT]};
-    if(SCALE_RE.test(low)) return {text:A_SCALE,links:[CONTACT]};
-    if(LIMITS_RE.test(low)) return {text:A_LIMITS,links:[CONTACT]};
+    if(/\b(not|doesn't|does not|can't|cannot|couldn't|won't) (fully )?(match|satisfy|meet)\b|\b(insufficient|not enough|aren't enough) (questions?|coverage)\b|\bblueprint (mismatch|compliance)\b/.test(low)){
+      var mm=findChunk('process','If the question bank cannot fully satisfy');
+      if(mm) return {text:mm.text,links:linksFor(mm)};
+    }
+    if(QUESTIONBANK_RE.test(low)){
+      var qb=findChunk('limitation','The question bank is currently a starter');
+      if(qb) return {text:qb.text,links:linksFor(qb)};
+    }
+    if(VARIANTS_RE.test(low)){
+      var vc=/\bpaper (a|b|c)\b/.test(low)?findChunk('progress','Dynamic number of variants'):(/\b(similar\w*|overlap)\b/.test(low)?findChunk('progress','Variant similarity'):findChunk('progress','True question diversity'));
+      if(vc) return {text:vc.text,links:linksFor(vc)};
+    }
+    if(/\bwhat is a blueprint\b|\bdefine blueprint\b|\bwhat('s| is) the blueprint\b/.test(low)){
+      var bp=findChunk('process','How EdInt works');
+      if(bp) return {text:bp.text,links:linksFor(bp)};
+    }
+    if(COUNT_RE.test(low)) return {text:A_UNKNOWN,links:[CONTACT]};
+    if(BOARD_RE.test(low)) return {text:A_BOARD,links:[CONTACT]};
+    if(SEGMENT_NO_RE.test(low)) return {text:A_UNKNOWN,links:[CONTACT]};
+    if(SEGMENT_RE.test(low)) return {text:A_PILOT_OPEN,links:[CONTACT]};
+    if(SUPPORT_RE.test(low)) return {text:A_CONTACT,links:[CONTACT]};
+    if(GRADE_RE.test(low) || (AI_RE.test(low) && /\b(grade|grading|evaluat\w*|correct\w*)\b/.test(low))) return {text:A_GRADE,links:[CONTACT]};
+    if(AI_RE.test(low)) return {text:A_AI,links:[ROADMAP]};
+    if(/\bfirst (available )?product\b/.test(low)) return {text:A_ERP,links:[CONTACT]};
+    if(ERP_RE.test(low) || ADMIN_RE.test(low)) return {text:A_ERP,links:[CONTACT]};
+    if(FUNDING_RE.test(low)) return {text:A_FUNDING,links:[CONTACT]};
+    if(WHEN_RE.test(low) || BAD_PHASE_RE.test(low)) return {text:A_UNKNOWN,links:[CONTACT]};
+    if(INTEGRATION_RE.test(low)) return {text:A_UNKNOWN,links:[CONTACT]};
+    if(APP_RE.test(low)) return {text:A_UNKNOWN,links:[CONTACT]};
+    if(EXTRACURRICULAR_RE.test(low)){
+      var ex=findChunk('modules',"Edora's modules");
+      if(ex) return {text:ex.text,links:linksFor(ex)};
+    }
+    if(/\bstudent (platform|app|portal)\b/.test(low)){
+      var sp=findChunk('planned','Student exam-taking interface');
+      if(sp) return {text:sp.text,links:linksFor(sp)};
+    }
+    if(/\bexport (my|our) data\b|\bdata export\b/.test(low)){
+      var de=findChunk('about','Data migration is free');
+      if(de) return {text:de.text,links:[CONTACT]};
+    }
+    if(LOCATION_RE.test(low) || WEBSITE_RE.test(low) || COMPANY_RE.test(low) || ONBOARD_RE.test(low)) return {text:A_UNKNOWN,links:[CONTACT]};
+    if(DEMO_RE.test(low) || PRIVACY_RE.test(low) || PARENTS_RE.test(low)) return {text:A_UNKNOWN,links:[CONTACT]};
+    if(MATH_RE.test(low) || OFFTOPIC_RE.test(low)) return {text:A_UNKNOWN,links:[CONTACT]};
+    if(CERT_RE.test(low) || POLICY_RE.test(low) || DATA_STORE_RE.test(low)) return {text:A_UNKNOWN,links:[CONTACT]};
+    if(/\b(upload|add|create|use|have) (my|our|own)( own)? (questions?|question bank)\b|\bpersonal (per[- ]teacher )?question bank\b/.test(low)){
+      var pq=findChunk('planned','Personal per-teacher question bank');
+      if(pq) return {text:pq.text,links:linksFor(pq)};
+    }
+    if(CONTACT_RE.test(low)) return {text:A_CONTACT,links:[CONTACT]};
+    if(/\bhow (does|do) (edint|it) work\b/.test(low)){
+      var st=findChunk('process','How EdInt works');
+      if(st){
+        var intro=findChunk('process','EdInt does not just ask');
+        return {text:(intro?intro.text+'\n\n':'')+st.text,links:[HOW]};
+      }
+    }
 
-    var hit=best(q);
-    if(hit) return {text:hit.a,links:hit.links||[]};
+    var qTokens=expand(tokenize(raw),low);
+    if(!/\b(phase|step|stage|grade|class|version|chapter|v\d)\b/.test(low)){
+      qTokens=qTokens.filter(function(t){ return !/^\d+$/.test(t); });
+    }
+    if(!qTokens.length) return {text:A_UNKNOWN,links:[CONTACT]};
 
-    return {text:(DOMAIN_RE.test(low)?A_UNKNOWN:A_OFFTOPIC),links:[CONTACT]};
+    var top=null, topScore=0;
+    for(var i=0;i<DOC_CHUNKS.length;i++){
+      var c=DOC_CHUNKS[i];
+      if(c.kind==='rules'||c.kind==='fallback') continue;
+      var sc=scoreChunk(c,qTokens,low);
+      if(sc>topScore){ topScore=sc; top=c; }
+    }
+    if(!top || topScore<4.5) return {text:A_UNKNOWN,links:[CONTACT]};
+
+    var maxIdf=0;
+    for(var k=0;k<qTokens.length;k++){ var idf=bestIdf(qTokens[k]); if(idf>maxIdf) maxIdf=idf; }
+    var isEntity=ENTITY_RE.test(low);
+    var isDomain=DOMAIN_RE.test(low);
+    if(!isEntity && maxIdf<2.0 && !(isDomain && qTokens.length>=2 && topScore>=8)){
+      return {text:A_UNKNOWN,links:[CONTACT]};
+    }
+    if(isEntity && maxIdf<2.0 && topScore<12) return {text:A_UNKNOWN,links:[CONTACT]};
+    return {text:top.text,links:linksFor(top)};
   }
-  window.EdoraChat={reply:reply,faq:FAQ.length,kb:KB.length};
+  window.EdoraChat={reply:reply,chunks:DOC_CHUNKS.length,faq:FAQ.length};
+
+
+
+
+
+
+
+
   if(!fab||!panel||!body||!chips||!form||!input) return;
 
   var greeted=false;
