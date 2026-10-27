@@ -341,6 +341,47 @@ body.no3d .sb-note{display:inline-flex}
 .sb-art{max-width:220px}
 }
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}#roadmap-marker,#roadmap-marker .rm-layer,#roadmap-marker .rm-layer svg,#roadmap-marker .tf-spark,#roadmap-marker .tf-canopy,.sb-node,.exp-loader i,#intro-canvas,.k-letter.run{animation:none!important}}
+/* ---- FAQ chat widget ---- */
+#edora-chat-fab{position:fixed;bottom:20px;right:20px;z-index:1000;width:58px;height:58px;border-radius:50%;border:0;cursor:pointer;display:flex;align-items:center;justify-content:center;color:#fff;background:linear-gradient(135deg,var(--indigo),var(--violet));box-shadow:0 14px 34px -12px rgba(79,70,229,.75),inset 0 0 0 1px rgba(255,255,255,.16);transition:transform .25s cubic-bezier(.2,.9,.25,1),box-shadow .25s ease;font-family:inherit}
+#edora-chat-fab:hover{transform:translateY(-3px) scale(1.05);box-shadow:0 20px 44px -12px rgba(124,58,237,.85),inset 0 0 0 1px rgba(255,255,255,.2)}
+#edora-chat-fab:active{transform:translateY(-1px) scale(1.02)}
+#edora-chat-fab svg{width:26px;height:26px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+#edora-chat-fab .chat-dot{position:absolute;top:8px;right:8px;width:9px;height:9px;border-radius:50%;background:#22d3ee;box-shadow:0 0 0 2px var(--bg);animation:chatPulse 2s ease-in-out infinite}
+@keyframes chatPulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.78)}}
+#edora-chat{position:fixed;bottom:90px;right:20px;z-index:1000;width:min(370px,calc(100vw - 32px));max-height:min(560px,calc(100vh - 130px));display:flex;flex-direction:column;border-radius:20px;border:1px solid var(--glass-brd);background:var(--glass);-webkit-backdrop-filter:blur(22px) saturate(1.4);backdrop-filter:blur(22px) saturate(1.4);box-shadow:0 30px 70px -28px rgba(15,23,42,.5),inset 0 1px 0 rgba(255,255,255,.25);overflow:hidden;opacity:0;visibility:hidden;pointer-events:none;transform:translateY(14px) scale(.97);transform-origin:bottom right;transition:opacity .28s ease,transform .34s cubic-bezier(.2,.9,.25,1),visibility .28s ease}
+#edora-chat.open{opacity:1;visibility:visible;pointer-events:auto;transform:translateY(0) scale(1)}
+[data-theme="dark"] #edora-chat{background:rgba(17,24,39,.84);border-color:rgba(255,255,255,.09);box-shadow:0 30px 70px -24px rgba(0,0,0,.8),inset 0 1px 0 rgba(255,255,255,.05)}
+.chat-head{display:flex;align-items:center;gap:10px;padding:14px 16px;border-bottom:1px solid var(--hairline);background:linear-gradient(135deg,color-mix(in srgb,var(--indigo) 15%,transparent),color-mix(in srgb,var(--violet) 12%,transparent))}
+.chat-head .ch-ico{width:34px;height:34px;border-radius:11px;display:grid;place-items:center;color:#fff;background:linear-gradient(135deg,var(--indigo),var(--violet));flex:none}
+.chat-head .ch-ico svg{width:19px;height:19px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.chat-head .ch-meta{flex:1;min-width:0}
+.chat-head .ch-title{margin:0;font-size:14.5px;font-weight:700;letter-spacing:-.01em;color:var(--ink);line-height:1.25}
+.chat-head .ch-sub{margin:2px 0 0;font-size:11.5px;font-weight:500;color:var(--mute);line-height:1.3}
+.chat-close{flex:none;width:30px;height:30px;border-radius:9px;border:1px solid var(--glass-brd);background:transparent;color:var(--mute);cursor:pointer;display:grid;place-items:center;transition:color .2s ease,background-color .2s ease}
+.chat-close:hover{color:var(--ink);background:var(--tint)}
+.chat-close svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:2.2;stroke-linecap:round}
+.chat-body{flex:1 1 auto;overflow-y:auto;overscroll-behavior:contain;padding:16px;display:flex;flex-direction:column;gap:10px;scrollbar-width:thin}
+.chat-msg{max-width:86%;padding:10px 13px;border-radius:14px;font-size:13.5px;line-height:1.5;letter-spacing:-.005em;white-space:pre-line;word-break:break-word;animation:chatIn .25s ease both}
+@keyframes chatIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.chat-msg.bot{align-self:flex-start;background:var(--card);color:var(--ink);border:1px solid var(--hairline);border-bottom-left-radius:5px}
+[data-theme="dark"] .chat-msg.bot{background:rgba(255,255,255,.05)}
+.chat-msg.user{align-self:flex-end;color:#fff;background:linear-gradient(135deg,var(--indigo),var(--violet));border-bottom-right-radius:5px}
+.chat-msg a.chat-link{display:inline-flex;align-items:center;gap:6px;margin:9px 6px 0 0;padding:9px 14px;border-radius:10px;font-size:12.5px;font-weight:700;color:#fff;background:linear-gradient(135deg,var(--indigo),var(--violet));text-decoration:none;transition:filter .2s ease,transform .2s ease}
+.chat-msg a.chat-link:hover{filter:brightness(1.1);transform:translateY(-1px)}
+.chat-suggest{display:flex;flex-wrap:wrap;gap:7px;padding:0 14px 12px}
+.chat-chip{border:1px solid var(--glass-brd);background:var(--glass);color:var(--ink);font-family:inherit;font-size:12px;font-weight:600;padding:7px 12px;border-radius:99px;cursor:pointer;transition:border-color .2s ease,background-color .2s ease,color .2s ease,transform .2s ease}
+.chat-chip:hover{border-color:var(--indigo);color:var(--indigo-d);transform:translateY(-1px)}
+[data-theme="dark"] .chat-chip:hover{color:var(--indigo)}
+.chat-input{display:flex;gap:8px;padding:12px 14px;border-top:1px solid var(--hairline);background:color-mix(in srgb,var(--card) 45%,transparent)}
+.chat-input input{flex:1;min-width:0;width:auto;font-family:inherit;font-size:13.5px;letter-spacing:-.005em;color:var(--ink);background:var(--card);border:1px solid var(--glass-brd);border-radius:12px;padding:11px 13px;transition:border-color .2s ease,box-shadow .2s ease}
+.chat-input input::placeholder{color:var(--mute)}
+.chat-input input:focus{outline:none;border-color:var(--indigo);box-shadow:0 0 0 3px rgba(79,70,229,.16)}
+.chat-send{flex:none;width:42px;height:42px;border-radius:12px;border:0;cursor:pointer;color:#fff;background:linear-gradient(135deg,var(--indigo),var(--violet));display:grid;place-items:center;transition:filter .2s ease,transform .2s ease}
+.chat-send:hover{filter:brightness(1.1)}
+.chat-send:active{transform:scale(.95)}
+.chat-send svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+@media(max-width:480px){#edora-chat{right:12px;bottom:84px;width:calc(100vw - 24px);max-height:calc(100vh - 120px)}#edora-chat-fab{width:54px;height:54px;bottom:16px;right:16px}.chat-input input{font-size:16px}}
+@media(prefers-reduced-motion:reduce){#edora-chat-fab,#edora-chat,.chat-msg,.chat-msg a.chat-link,.chat-chip{transition:none!important;animation:none!important}}
 </style>
 </head>
 <body>
@@ -581,6 +622,24 @@ body.no3d .sb-note{display:inline-flex}
 </div>
 <div class="foot-bottom">© 2026 Edora. All rights reserved.</div>
 </div></footer>
+
+<button id="edora-chat-fab" type="button" aria-label="Open Edora FAQ chat" aria-expanded="false" aria-controls="edora-chat">
+<span class="chat-dot" aria-hidden="true"></span>
+<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+</button>
+<div id="edora-chat" role="dialog" aria-label="Edora FAQ assistant" aria-modal="false">
+<div class="chat-head">
+<div class="ch-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3a9 9 0 0 0-9 9c0 1.6.4 3 1.1 4.3L3 21l4.8-1.2A9 9 0 1 0 12 3z"/><path d="M9 10h6M9 14h4"/></svg></div>
+<div class="ch-meta"><p class="ch-title">Edora Assistant</p><p class="ch-sub">Ask about Edora, EdInt, pilots &amp; pricing</p></div>
+<button class="chat-close" type="button" id="edoraChatClose" aria-label="Close chat"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+</div>
+<div class="chat-body" id="edoraChatBody" aria-live="polite"></div>
+<div class="chat-suggest" id="edoraChatChips" aria-label="Suggested questions"></div>
+<form class="chat-input" id="edoraChatForm" autocomplete="off">
+<input id="edoraChatInput" type="text" name="q" placeholder="Ask a question…" aria-label="Your question" maxlength="300">
+<button class="chat-send" type="submit" aria-label="Send message"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 2 11 13"/><path d="M22 2 15 22l-4-9-9-4 20-7z"/></svg></button>
+</form>
+</div>
 
 <script>
 (function(){
@@ -1926,5 +1985,154 @@ form.addEventListener('submit',function(ev){
 })();
 </script>
 
+
+<script>
+(function(){
+  var fab=document.getElementById('edora-chat-fab');
+  var panel=document.getElementById('edora-chat');
+  var closeBtn=document.getElementById('edoraChatClose');
+  var body=document.getElementById('edoraChatBody');
+  var chips=document.getElementById('edoraChatChips');
+  var form=document.getElementById('edoraChatForm');
+  var input=document.getElementById('edoraChatInput');
+  if(!fab||!panel||!body||!chips||!form||!input) return;
+
+  var KB=[
+    {q:"What is Edora?",tags:["edora","platform","school","os","overview","product","module","modules","modular","features","feature","about"],
+     a:"Edora is a modular education platform - a school OS for classrooms. It removes teachers' non-teaching admin work, starting with exams, so more time goes to actual teaching.\n\nIt is built for CBSE Classes 9-12 (Science & Maths) first, then wider boards.",
+     links:[{label:"Explore the platform",href:"#solution"}]},
+    {q:"What does EdInt do?",tags:["edint","test","tests","exam","exams","paper","papers","question","questions","generation","generate","assessment","automated","blueprint","insight","insights","analytics","marks","marking","grading","grade"],
+     a:"EdInt is Edora's automated assessment engine. It drafts a balanced question paper in minutes from your chosen class, chapters and difficulty - with the answer key, marking scheme and blueprint split included.\n\nIt also shows topic-level insights so you can see exactly where each student is stuck.",
+     links:[{label:"See how EdInt works",href:"#experience"}]},
+    {q:"How do I join the pilot?",tags:["pilot","join","sign","signup","register","registration","enroll","apply","waitlist","early","access","trial","start","demo"],
+     a:"We are opening a small number of pilot spots for CBSE schools. Tell us about your school using the 'Join the pilot' form and the team will reach out.\n\nPhase 1 is completely free - no commitment.",
+     links:[{label:"Join the pilot",href:"#join"},{label:"Take the teacher survey",href:"teacher-survey.html"}]},
+    {q:"Who is Edora for?",tags:["audience","target","schools","teachers","cbse","class","classes","grade","grades","subject","subjects","students","whom"],
+     a:"Edora is built for CBSE schools - initially Classes 9-12 in Science and Maths. It is designed for teachers and school leaders who want to cut admin time, and for students who need clearer feedback."},
+    {q:"What is the Teacher Survey?",tags:["survey","feedback","questionnaire","form","shape","input","minutes","time","quick","long"],
+     a:"The Teacher Survey is a quick four-step questionnaire (about five minutes). Your answers go straight to the team building Edora and help decide what we build first.",
+     links:[{label:"Open the Teacher Survey",href:"teacher-survey.html"}]},
+    {q:"How much does Edora cost?",tags:["pricing","price","prices","cost","costs","fee","fees","free","paid","pay","tier","tiers","plan","plans","subscription","expensive","charge","money","budget"],
+     a:"Pricing is simple and transparent. Phase 1 - the pilot - is completely free, waitlist-based, with no payment and no contract. After that, you will only ever pay for what you use. Setup is free.",
+     links:[{label:"View pricing",href:"#pricing"}]},
+    {q:"Where is Edora available?",tags:["available","availability","launch","rollout","release","region","regions","country","countries","global","boards","ib","igcse","state","expansion"],
+     a:"Edora starts with CBSE pilots in Phase 1 (our 'Sapling' stage), then expands to more boards and a global, multi-medium AI platform ('Tree') over time.",
+     links:[{label:"See the roadmap",href:"#roadmap"}]},
+    {q:"How can I contact Edora?",tags:["contact","email","reach","support","help","talk","speak","call","phone","address","team"],
+     a:"You can reach the team any time at admin.edora@gmail.com, or use the pilot form and we will get back to you.",
+     links:[{label:"Email us",href:"mailto:admin.edora@gmail.com"},{label:"Join the pilot",href:"#join"}]},
+    {q:"Who is behind Edora?",tags:["trust","founder","founders","company","built","educators","engineers","security","privacy","data","compliance","curriculum"],
+     a:"Edora is built by educators and engineers focused on curriculum compliance and lightening teachers' admin load. Student data is handled carefully - we are happy to walk through the specifics during your pilot onboarding.",
+     links:[{label:"Why trust us",href:"#trust"}]}
+  ];
+  var SUGGEST=["What is Edora?","What does EdInt do?","How do I join the pilot?","Is it free?","Teacher survey","Contact"];
+
+  var STOP={a:1,an:1,the:1,is:1,are:1,am:1,do:1,does:1,did:1,how:1,what:1,who:1,whom:1,whose:1,when:1,where:1,why:1,which:1,can:1,could:1,would:1,should:1,i:1,you:1,we:1,they:1,he:1,she:1,it:1,my:1,me:1,our:1,us:1,your:1,to:1,of:1,for:1,and:1,or:1,on:1,in:1,at:1,with:1,about:1,much:1,many:1,this:1,that:1,these:1,those:1,be:1,been:1,being:1,get:1,got:1,have:1,has:1,had:1,will:1,please:1,tell:1,give:1,want:1,need:1,there:1,their:1,them:1,from:1,by:1,as:1,so:1,if:1,then:1,than:1,also:1,just:1,like:1,take:1};
+  function tokenize(s){ return String(s||'').toLowerCase().replace(/[^a-z0-9\s]/g,' ').split(/\s+/).filter(Boolean); }
+  function keywords(s){ return tokenize(s).filter(function(w){ return w.length>1 && !STOP[w]; }); }
+  function lev(a,b){
+    var la=a.length,lb=b.length,i,j,prev=[],cur=[];
+    if(a===b) return 0;
+    if(!la) return lb; if(!lb) return la;
+    for(j=0;j<=lb;j++) prev[j]=j;
+    for(i=1;i<=la;i++){
+      cur[0]=i;
+      for(j=1;j<=lb;j++){
+        var cost=a.charAt(i-1)===b.charAt(j-1)?0:1;
+        cur[j]=Math.min(prev[j]+1,cur[j-1]+1,prev[j-1]+cost);
+      }
+      var tmp=prev; prev=cur; cur=tmp;
+    }
+    return prev[lb];
+  }
+  function sim(a,b){ a=a||''; b=b||''; var m=Math.max(a.length,b.length); return m?(1-lev(a,b)/m):0; }
+  for(var e0=0;e0<KB.length;e0++){ KB[e0]._hay=(KB[e0].tags.join(' ')+' '+KB[e0].q+' '+KB[e0].a).toLowerCase(); }
+  function score(q,e){
+    var kws=keywords(q),s=0,i,j;
+    for(i=0;i<kws.length;i++){
+      var w=kws[i];
+      if(e.tags.indexOf(w)>=0){ s+=3; continue; }
+      if(e._hay.indexOf(w)>=0){ s+=1.4; continue; }
+      for(j=0;j<e.tags.length;j++){ if(sim(w,e.tags[j])>=0.8){ s+=1.5; break; } }
+    }
+    s+=sim(kws.join(' '),(e.q+' '+e.tags.join(' ')).toLowerCase())*2.5;
+    return s;
+  }
+  function best(q){
+    var top=null,topS=0;
+    for(var i=0;i<KB.length;i++){ var sc=score(q,KB[i]); if(sc>topS){ topS=sc; top=KB[i]; } }
+    return topS>=3?top:null;
+  }
+
+  var greeted=false;
+  function scrollDown(){ body.scrollTop=body.scrollHeight; }
+  function addMsg(who,text,links){
+    var m=document.createElement('div');
+    m.className='chat-msg '+who;
+    m.textContent=text;
+    if(links&&links.length){
+      for(var i=0;i<links.length;i++){
+        var a=document.createElement('a');
+        a.className='chat-link'; a.href=links[i].href; a.textContent=links[i].label;
+        m.appendChild(a);
+      }
+    }
+    body.appendChild(m); scrollDown(); return m;
+  }
+  function answer(q){
+    var low=String(q||'').toLowerCase().trim();
+    if(/^(hi|hello|hey|yo|hiya|hola|namaste)\b/.test(low) || /good (morning|afternoon|evening)/.test(low)){
+      addMsg('bot',"Hi! I am the Edora assistant. Ask me about Edora, our EdInt exam engine, the pilot, pricing, or the teacher survey.");
+      return;
+    }
+    if(/^(thanks|thank you|thx|ty)\b/.test(low)){ addMsg('bot',"You are welcome! Anything else I can help with?"); return; }
+    var hit=best(q);
+    if(hit){ addMsg('bot',hit.a,hit.links); }
+    else{
+      addMsg('bot',"I am not sure about that one just yet. The Edora team would love to hear your question - send it through the Teacher Survey or reach us directly.",
+        [{label:"Ask via Teacher Survey",href:"teacher-survey.html"},{label:"Contact us",href:"mailto:admin.edora@gmail.com"}]);
+    }
+  }
+  function send(q){
+    q=String(q||'').trim();
+    if(!q) return;
+    addMsg('user',q);
+    input.value='';
+    try{ input.focus({preventScroll:true}); }catch(e){ input.focus(); }
+    window.setTimeout(function(){ answer(q); },140);
+  }
+  function renderChips(){
+    chips.textContent='';
+    for(var i=0;i<SUGGEST.length;i++){
+      (function(label){
+        var b=document.createElement('button');
+        b.type='button'; b.className='chat-chip'; b.textContent=label;
+        b.addEventListener('click',function(){ send(label); });
+        chips.appendChild(b);
+      })(SUGGEST[i]);
+    }
+  }
+  function openChat(){
+    panel.classList.add('open');
+    fab.setAttribute('aria-expanded','true');
+    if(!greeted){
+      greeted=true;
+      addMsg('bot',"Hi! I am the Edora assistant. Ask me anything about Edora, our EdInt exam engine, the pilot, pricing, or the teacher survey.");
+    }
+    window.setTimeout(function(){ try{ input.focus({preventScroll:true}); }catch(e){ input.focus(); } },260);
+  }
+  function closeChat(){ panel.classList.remove('open'); fab.setAttribute('aria-expanded','false'); }
+
+  fab.addEventListener('click',function(){ if(panel.classList.contains('open')) closeChat(); else openChat(); });
+  closeBtn.addEventListener('click',closeChat);
+  document.addEventListener('keydown',function(e){ if((e.key==='Escape'||e.key==='Esc')&&panel.classList.contains('open')) closeChat(); });
+  form.addEventListener('submit',function(e){ e.preventDefault(); send(input.value); });
+  body.addEventListener('click',function(e){
+    var t=e.target, a=(t&&t.closest)?t.closest('a.chat-link'):null;
+    if(a) closeChat();
+  });
+  renderChips();
+})();
+</script>
 </body>
 </html>
