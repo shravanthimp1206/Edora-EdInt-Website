@@ -80,6 +80,7 @@ h1 em{font-style:normal;display:block;background:linear-gradient(120deg,var(--in
 .tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}
 .tags span{font-size:13px;font-weight:600;color:var(--indigo-d);background:var(--tint);border:1px solid rgba(79,70,229,.18);padding:6px 13px;border-radius:99px}
 .mock{background:var(--card);border:1px solid var(--hairline);border-radius:20px;padding:22px;box-shadow:0 20px 50px -30px rgba(15,23,42,.35)}
+html:not([data-theme="dark"]) .mock{border-color:#1e1b4b;box-shadow:0 20px 25px -5px rgba(0,0,0,.15)}
 .mock .top{display:flex;justify-content:space-between;align-items:center;font-size:14px;color:var(--mute);font-weight:500}
 .mock .top b{color:var(--ink);font-size:16px}
 .mock .top .live{display:inline-flex;align-items:center;gap:7px}
@@ -268,9 +269,12 @@ body.has3d .exp-track,body.trying3d .exp-track{display:block}
 body.has3d .exp-storyboard,body.trying3d .exp-storyboard{display:none}
 .exp-sticky{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden}
 .exp-bg{position:absolute;inset:0;z-index:0;background:radial-gradient(120% 92% at 50% 0%,var(--tint),transparent 66%),radial-gradient(90% 70% at 85% 100%,var(--tint),transparent 72%),transparent}
+html:not([data-theme="dark"]) .exp-bg{background:transparent}
 #exp-canvas{position:fixed;left:0;top:0;width:100%;height:100%;display:block;z-index:-1;opacity:0;transition:opacity .9s ease;pointer-events:none}
 #exp-canvas.on{opacity:.5}
 #exp-canvas.on:not(.dim){opacity:.82}
+html:not([data-theme="dark"]) #exp-canvas.on{opacity:.62}
+html:not([data-theme="dark"]) #exp-canvas.on:not(.dim){opacity:.95}
 #intro #exp-canvas{position:absolute;inset:0;z-index:1;opacity:0}
 #intro #exp-canvas.on{opacity:1}
 body.no3d #exp-canvas{display:none}
@@ -992,7 +996,7 @@ form.addEventListener('submit',function(ev){
 
   var THREE_URL='https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js';
   var scene,camera,renderer,clock,starMat,gridMat,neuralMat,neuralNodeMat;
-  var ghostMats=[],nodeMats=[],bookMats=[],pulses=[],floaters=[],neuralNodes=[];
+  var ghostMats=[],nodeMats=[],bookMats=[],pulses=[],floaters=[],neuralNodes=[],shadowMats=[],shadowTex=null;
   var ambient,keyLight,rim1,rim2,camCurve,lookCurve,lookTarget;
   var inView=false,active=false,raf=null,lastIdx=-2,smooth=0,target=0;
   var mouse={x:0,y:0};
@@ -1012,8 +1016,8 @@ form.addEventListener('submit',function(ev){
   var LIGHTMUL={home:0.82,product:1.0,pricing:0.8,roadmap:0.92,trust:0.96,experience:1.0};
   var tv1,tv2,tv3,tv4;
   // light = darker, high-contrast plum/indigo tones; dark = bright neon accents (unchanged)
-  var C_LIGHT={grid:0x3b2c63,neural:0x1E3A8A,neuralNode:0x1E3A8A,neuralNodeEmis:0x1E3A8A,ghost:0x4c2f78,nodeBody:0x3b2c63,nodeEmis:0x6d28d9,dust:0x4c1d95,amb:0x9aa0d0,ambI:0.72,keyI:1.0,rim1I:0.5,rim2I:0.45,gridOp:0.5,neuralOp:0.5,ghostOp:0.16,dustOp:0.55,nodeEmisI:0.5,bookEmisI:0.16};
-  var C_DARK={grid:0x8b93ff,neural:0x38BDF8,neuralNode:0x38BDF8,neuralNodeEmis:0x38BDF8,ghost:0xa78bfa,nodeBody:0x141b2e,nodeEmis:0x8b5cf6,dust:0x9aa4ff,amb:0xffffff,ambI:0.62,keyI:0.75,rim1I:1.5,rim2I:1.2,gridOp:0.5,neuralOp:0.6,ghostOp:0.16,dustOp:0.7,nodeEmisI:0.95,bookEmisI:0.28};
+  var C_LIGHT={grid:0x4f46e5,neural:0x4f46e5,neuralNode:0x4338ca,neuralNodeEmis:0x7c3aed,ghost:0x5b21b6,nodeBody:0x4338ca,nodeEmis:0x7c3aed,dust:0x7c3aed,amb:0xdfe3ff,ambI:0.3,keyI:0.3,rim1I:0.45,rim2I:0.4,gridOp:0.8,neuralOp:0.8,ghostOp:0.3,dustOp:0.8,nodeEmisI:0.65,bookEmisI:0.4,shadowOp:0.5};
+  var C_DARK={grid:0x8b93ff,neural:0x38BDF8,neuralNode:0x38BDF8,neuralNodeEmis:0x38BDF8,ghost:0xa78bfa,nodeBody:0x141b2e,nodeEmis:0x8b5cf6,dust:0x9aa4ff,amb:0xffffff,ambI:0.62,keyI:0.75,rim1I:1.5,rim2I:1.2,gridOp:0.5,neuralOp:0.6,ghostOp:0.16,dustOp:0.7,nodeEmisI:0.95,bookEmisI:0.28,shadowOp:0.08};
   var themeMix=isDark()?1:0,themeTarget=themeMix,themeCol={};
   function tc(hex){ if(!themeCol[hex]) themeCol[hex]=new THREE.Color(hex); return themeCol[hex]; }
   // scroll progress (0..1) at which the camera is focused on each landmark
@@ -1055,6 +1059,7 @@ form.addEventListener('submit',function(ev){
       var e=arr[i],m=e.m;
       m.color.copy(tc(e.l)).lerp(tc(e.d),t);
       if(m.emissive){ m.emissive.copy(tc(e.el!==undefined?e.el:e.l)).lerp(tc(e.ed!==undefined?e.ed:e.d),t); }
+      if(e.lo!==undefined){ var op=e.lo+((e.do!==undefined?e.do:e.lo)-e.lo)*t; setBase(m,op); m.opacity=op*(g.userData.w||1); }
     }
   }
   function setBase(m,op){ if(!m) return; if(!m.userData) m.userData={}; m.userData._base=op; }
@@ -1103,6 +1108,7 @@ form.addEventListener('submit',function(ev){
     var grp=new THREE.Group(); grp.position.set(0,1.2,-4); grp.rotation.x=-0.12;
     gridMat=mkLineMat(0x4f46e5,0.4);
     grp.add(makeGrid(14,9,7,5,gridMat));
+    addShadow(17,11,0,-3.6,-4,0);
     var nodeMat=new THREE.MeshStandardMaterial({color:0xffffff,roughness:0.35,metalness:0.3,emissive:0x4f46e5,emissiveIntensity:0.4,flatShading:true});
     nodeMats.push(nodeMat);
     var coords=[[-7,-4.5],[7,-4.5],[-7,4.5],[7,4.5],[0,0],[-7,0],[7,0]];
@@ -1123,24 +1129,46 @@ form.addEventListener('submit',function(ev){
 
   function paperTexture(){
     var c=document.createElement('canvas'); c.width=512; c.height=680;
-    var x=c.getContext('2d');
-    x.fillStyle='#ffffff'; x.fillRect(0,0,512,680);
-    x.fillStyle='#4f46e5'; x.fillRect(0,0,512,62);
+    var x=c.getContext('2d'),W=512,H=680;
+    x.fillStyle='#1e1b4b'; x.fillRect(0,0,W,H);
+    x.fillStyle='#ffffff'; x.fillRect(12,12,W-24,H-24);
+    x.fillStyle='#1e1b4b'; x.fillRect(12,12,W-24,58);
     x.fillStyle='#eef0ff'; x.font='bold 26px system-ui,Segoe UI,sans-serif';
-    x.fillText('EdInt  \u00b7  Unit Test',26,41);
-    x.fillStyle='#0f172a'; x.font='bold 21px system-ui,Segoe UI,sans-serif';
-    x.fillText('Class X  \u00b7  Science  \u00b7  Ch. 4',26,112);
-    x.fillStyle='#64748b'; x.font='15px system-ui,Segoe UI,sans-serif';
-    x.fillText('Time: 45 min          Max Marks: 20',26,140);
-    x.strokeStyle='rgba(15,23,42,.16)'; x.lineWidth=3;
-    for(var i=0;i<7;i++){ var y=182+i*46; x.beginPath(); x.moveTo(26,y); x.lineTo(26+(i%3===2?330:456),y); x.stroke(); }
-    x.strokeStyle='#7c3aed'; x.lineWidth=3;
-    for(var k=0;k<4;k++){ x.strokeRect(26+k*54,520,32,32); }
-    x.beginPath(); x.moveTo(33,536); x.lineTo(42,547); x.lineTo(58,522); x.stroke();
+    x.fillText('EdInt  \u00b7  Unit Test',30,50);
+    x.fillStyle='#1e1b4b'; x.font='bold 21px system-ui,Segoe UI,sans-serif';
+    x.fillText('Class X  \u00b7  Science  \u00b7  Ch. 4',30,116);
+    x.fillStyle='#312e81'; x.font='15px system-ui,Segoe UI,sans-serif';
+    x.fillText('Time: 45 min          Max Marks: 20',30,144);
+    x.strokeStyle='rgba(30,27,75,.38)'; x.lineWidth=3;
+    for(var i=0;i<7;i++){ var y=186+i*46; x.beginPath(); x.moveTo(30,y); x.lineTo(30+(i%3===2?326:452),y); x.stroke(); }
+    x.strokeStyle='#1e1b4b'; x.lineWidth=3;
+    for(var k=0;k<4;k++){ x.strokeRect(30+k*54,524,32,32); }
+    x.beginPath(); x.moveTo(37,540); x.lineTo(46,551); x.lineTo(62,526); x.stroke();
     var t=new THREE.CanvasTexture(c);
     if('sRGBEncoding' in THREE) t.encoding=THREE.sRGBEncoding;
     if('anisotropy' in t) t.anisotropy=2;
     return t;
+  }
+
+  function softShadowTex(){
+    var c=document.createElement('canvas'); c.width=c.height=256;
+    var x=c.getContext('2d');
+    var g=x.createRadialGradient(128,128,8,128,128,126);
+    g.addColorStop(0,'rgba(30,27,75,.62)');
+    g.addColorStop(0.55,'rgba(30,27,75,.26)');
+    g.addColorStop(1,'rgba(30,27,75,0)');
+    x.fillStyle=g; x.fillRect(0,0,256,256);
+    return new THREE.CanvasTexture(c);
+  }
+  function addShadow(w,d,px,py,pz,rotZ){
+    if(!shadowTex) shadowTex=softShadowTex();
+    var m=new THREE.MeshBasicMaterial({map:shadowTex,transparent:true,opacity:0.5,depthWrite:false});
+    shadowMats.push(m);
+    var s=new THREE.Mesh(new THREE.PlaneGeometry(w,d),m);
+    s.rotation.x=-Math.PI/2; if(rotZ) s.rotation.z=rotZ;
+    s.position.set(px,py,pz);
+    expGroup.add(s);
+    return s;
   }
 
   function document3D(){
@@ -1154,6 +1182,7 @@ form.addEventListener('submit',function(ev){
       g.position.set(0.25*i,-0.2*i,-0.7*i); g.rotation.z=0.03*i;
       grp.add(g);
     }
+    addShadow(11,5.5,5,-5.6,-24,0);
     expGroup.add(grp);
   }
 
@@ -1182,7 +1211,7 @@ form.addEventListener('submit',function(ev){
   }
 
   function ambientStuff(){
-    var palette=[[0x312e81,0x6366f1],[0x5b21b6,0xa78bfa],[0x4c1d95,0x8b5cf6]];
+    var palette=[[0x7c3aed,0x6366f1],[0x4338ca,0x38bdf8],[0x0284c7,0x38bdf8]];
     var spots=[[-5,3.4,1],[5.2,2.3,-1],[-11,-1,-30],[9,4,-40],[-8,5,-52],[11,1,-58]];
     for(var i=0;i<spots.length;i++){
       var pal=palette[i%3];
@@ -1212,7 +1241,7 @@ form.addEventListener('submit',function(ev){
 
   function buildHome(){
     var g=new THREE.Group(); g.position.set(0,1.9,0); g.userData.theme=[];
-    var wireE={m:new THREE.LineBasicMaterial({color:0x3b2c63,transparent:true,opacity:.3}),l:0x3b2c63,d:0x8b93ff};
+    var wireE={m:new THREE.LineBasicMaterial({color:0x4f46e5,transparent:true,opacity:.5}),l:0x4f46e5,d:0x8b93ff,lo:0.62,do:0.32};
     g.userData.theme.push(wireE);
     g.add(new THREE.LineSegments(new THREE.WireframeGeometry(new THREE.IcosahedronGeometry(3.5,1)),wireE.m));
     var coreE=mkBaby(0x6d28d9,0xa78bfa,0x7c3aed,0xa855f7);
@@ -1233,11 +1262,11 @@ form.addEventListener('submit',function(ev){
 
   function buildProduct(){
     var g=new THREE.Group(); g.position.set(0,1.9,0); g.userData.theme=[];
-    var bodyE={m:new THREE.MeshStandardMaterial({color:0xeef1ff,roughness:.5,metalness:.15,emissive:0x4f46e5,emissiveIntensity:.16,transparent:true,opacity:.3,side:THREE.DoubleSide,flatShading:true}),l:0xeef1ff,d:0x161d33,el:0x4f46e5,ed:0x38bdf8};
+    var bodyE={m:new THREE.MeshStandardMaterial({color:0x6366f1,roughness:.5,metalness:.15,emissive:0x4f46e5,emissiveIntensity:.2,transparent:true,opacity:.3,side:THREE.DoubleSide,flatShading:true}),l:0x6366f1,d:0x161d33,el:0x4f46e5,ed:0x38bdf8,lo:0.24,do:0.3};
     g.userData.theme.push(bodyE);
     var edgeE={m:new THREE.LineBasicMaterial({color:0x6366f1,transparent:true,opacity:.85}),l:0x6366f1,d:0x8b93ff};
     g.userData.theme.push(edgeE);
-    var streamE={m:new THREE.LineBasicMaterial({color:0x38bdf8,transparent:true,opacity:.5}),l:0x2b6cb0,d:0x38bdf8};
+    var streamE={m:new THREE.LineBasicMaterial({color:0x38bdf8,transparent:true,opacity:.5}),l:0x4f46e5,d:0x38bdf8,lo:0.62,do:0.5};
     g.userData.theme.push(streamE);
     var layout=[[-4.7,1.7,.6],[-1.7,2.6,-.4],[1.6,1.4,0],[4.6,2.2,-1.1],[-3.3,-1.1,-.8],[0.2,-1.6,.3],[3.7,-.8,-1.5]];
     var cards=[];
@@ -1308,9 +1337,9 @@ form.addEventListener('submit',function(ev){
 
   function buildTrust(){
     var g=new THREE.Group(); g.position.set(0,1.9,0); g.userData.theme=[];
-    var shieldE={m:new THREE.MeshStandardMaterial({color:0x6366f1,roughness:.35,metalness:.35,emissive:0x4f46e5,emissiveIntensity:.45,transparent:true,opacity:.4,flatShading:true}),l:0x6366f1,d:0x818cf8,el:0x4f46e5,ed:0x38bdf8};
+    var shieldE={m:new THREE.MeshStandardMaterial({color:0x6366f1,roughness:.35,metalness:.35,emissive:0x4f46e5,emissiveIntensity:.5,transparent:true,opacity:.4,flatShading:true}),l:0x6366f1,d:0x818cf8,el:0x4f46e5,ed:0x38bdf8,lo:0.45,do:0.4};
     g.userData.theme.push(shieldE);
-    var wireE={m:new THREE.LineBasicMaterial({color:0x1e3a8a,transparent:true,opacity:.7}),l:0x1e3a8a,d:0x38bdf8};
+    var wireE={m:new THREE.LineBasicMaterial({color:0x4f46e5,transparent:true,opacity:.7}),l:0x4f46e5,d:0x38bdf8,lo:0.72,do:0.7};
     g.userData.theme.push(wireE);
     var nodeE=mkBaby(0x6d28d9,0xa78bfa,0x7c3aed,0xa855f7);
     g.userData.theme.push(nodeE);
@@ -1414,6 +1443,7 @@ form.addEventListener('submit',function(ev){
     for(i=0;i<ghostMats.length;i++){ ghostMats[i].color.copy(tc(L.ghost)).lerp(tc(D.ghost),t); setBase(ghostMats[i],L.ghostOp+(D.ghostOp-L.ghostOp)*t); }
     for(i=0;i<nodeMats.length;i++){ m=nodeMats[i]; m.color.copy(tc(L.nodeBody)).lerp(tc(D.nodeBody),t); m.emissive.copy(tc(L.nodeEmis)).lerp(tc(D.nodeEmis),t); m.emissiveIntensity=L.nodeEmisI+(D.nodeEmisI-L.nodeEmisI)*t; }
     for(i=0;i<bookMats.length;i++){ m=bookMats[i].m; m.color.copy(tc(bookMats[i].l)).lerp(tc(bookMats[i].d),t); m.emissive.copy(tc(bookMats[i].l)).lerp(tc(bookMats[i].d),t); m.emissiveIntensity=L.bookEmisI+(D.bookEmisI-L.bookEmisI)*t; }
+    for(i=0;i<shadowMats.length;i++){ setBase(shadowMats[i],L.shadowOp+(D.shadowOp-L.shadowOp)*t); }
     if(starMat){ starMat.color.copy(tc(L.dust)).lerp(tc(D.dust),t); setBase(starMat,L.dustOp+(D.dustOp-L.dustOp)*t); var bl=(t>0.5?THREE.AdditiveBlending:THREE.NormalBlending); if(starMat.blending!==bl){ starMat.blending=bl; starMat.needsUpdate=true; } }
     if(ambient){ ambient.color.copy(tc(L.amb)).lerp(tc(D.amb),t); ambient.intensity=(L.ambI+(D.ambI-L.ambI)*t)*lightMul; }
     if(keyLight) keyLight.intensity=(L.keyI+(D.keyI-L.keyI)*t)*lightMul;
@@ -1692,7 +1722,7 @@ form.addEventListener('submit',function(ev){
   function fieldPalette(){
     var d=isDark();
     return d?{cols:[0x818cf8,0xa78bfa,0x38bdf8,0x8b5cf6],emisI:0.95,tile:0x8b93ff,tileOp:0.5,point:0xa78bfa,pointOp:0.9,ambI:0.75,l1:0x7c3aed,l1I:1.5,l2:0x4f46e5,l2I:1.2}
-            :{cols:[0x4f46e5,0x7c3aed,0x6366f1,0x8b5cf6],emisI:0.5,tile:0x4f46e5,tileOp:0.34,point:0x8b5cf6,pointOp:0.62,ambI:0.95,l1:0x7c3aed,l1I:0.85,l2:0x4f46e5,l2I:0.7};
+            :{cols:[0x7c3aed,0x4338ca,0x0284c7,0x5b21b6],emisI:0.6,tile:0x4f46e5,tileOp:0.8,point:0x7c3aed,pointOp:0.8,ambI:0.3,l1:0x7c3aed,l1I:0.9,l2:0x4f46e5,l2I:0.8};
   }
   function mkGrid(T,w,h,cols,rows,mat){
     var pts=[];
@@ -1895,7 +1925,6 @@ form.addEventListener('submit',function(ev){
   }
 })();
 </script>
-
 
 </body>
 </html>
