@@ -216,6 +216,10 @@ footer{padding:22px 0 36px;font-size:13px}
 <label class="pill"><input type="checkbox" value="Meeting deadlines"><span>Meeting deadlines</span></label>
 </div>
 </div>
+<div class="q">
+<label class="qlabel" for="frustration_manual">What's the most frustrating part of setting exam papers manually? <span class="opt">(optional)</span></label>
+<textarea id="frustration_manual" name="frustration_manual_paper" placeholder="Type your answer here..."></textarea>
+</div>
 </fieldset>
 </section>
 
@@ -286,13 +290,13 @@ footer{padding:22px 0 36px;font-size:13px}
 <div class="survey-success" id="surveySuccess" hidden>
 <div class="tick"><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg></div>
 <h2>Thank you for sharing!</h2>
-<p>Your feedback is shaping Edora. If you added an email, we'll be in touch. Questions? Write to <a class="mail" href="mailto:admin.edora@gmail.com">admin.edora@gmail.com</a>.</p>
+<p>Your feedback is shaping Edora. If you added an email, we'll be in touch. Questions? Write to <a class="mail" href="mailto:hello@edora.org.in">hello@edora.org.in</a>.</p>
 </div>
 
 </div>
 </main>
 
-<footer>© 2026 Edora · admin.edora@gmail.com</footer>
+<footer>© 2026 Edora · hello@edora.org.in</footer>
 
 <script>
 (function(){
@@ -473,7 +477,7 @@ footer{padding:22px 0 36px;font-size:13px}
         submitBtn.disabled=false;
         backBtn.disabled=false;
         submitBtn.classList.remove('loading');
-        status.textContent=(r.json&&r.json.message)?r.json.message:'Something went wrong. Please email admin.edora@gmail.com.';
+        status.textContent=(r.json&&r.json.message)?r.json.message:'Something went wrong. Please email hello@edora.org.in.';
         status.className='survey-status err';
       }
     })
@@ -482,7 +486,7 @@ footer{padding:22px 0 36px;font-size:13px}
       submitBtn.disabled=false;
       backBtn.disabled=false;
       submitBtn.classList.remove('loading');
-      status.textContent='Network error after retries. Please email admin.edora@gmail.com.';
+      status.textContent='Network error after retries. Please email hello@edora.org.in.';
       status.className='survey-status err';
     });
   });
